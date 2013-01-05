@@ -1,12 +1,29 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RCCarControl/Main.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RCCarControl/SerialRCCarHardwareInterface.cs">
     <Files>
-      <File FileName="RCCarControl/Main.cs" Line="1" Column="1" />
+      <File FileName="RCCarControl/Main.cs" Line="16" Column="1" />
+      <File FileName="RCCarControl/SerialRCCarHardwareInterface.cs" Line="56" Column="17" />
+      <File FileName="RCCarControl/Sensor.cs" Line="20" Column="45" />
+      <File FileName="RCCarControl/UltrasonicSensor.cs" Line="8" Column="4" />
+      <File FileName="RCCarControl/AccelerometorSensor.cs" Line="12" Column="31" />
+      <File FileName="RCCarControl/AssemblyInfo.cs" Line="28" Column="1" />
+      <File FileName="RCCarControl/Servo.cs" Line="21" Column="5" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="RCCarControl" expanded="True">
+            <Node name="SerialRCCarHardwareInterface.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="RCCarControl/SerialRCCarHardwareInterface.cs" line="87" offsetX="494" offsetY="1296" expression="message" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>

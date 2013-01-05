@@ -9,7 +9,7 @@ namespace RCCarControl {
 
 		internal Servo(IRCCarHardwareInterface hardwareInterface) {
 			_hardwareInterface = hardwareInterface;
-			Value = 0.0;
+			_value = 0.0;
 		}
 
 		public double Value {

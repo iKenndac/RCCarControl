@@ -10,14 +10,14 @@ namespace RCCarControl
 		{
 		}
 
-		public delegate void SensorReadingChangedEventHandler(object sender, ReadingChangedEventArgs e);
+		public delegate void SensorReadingChangedEventHandler(Sensor sender, ReadingChangedEventArgs e);
 		public event SensorReadingChangedEventHandler ReadingChanged;
 
 		String Name {
 			get { return "Unknown Sensor"; }
 		}
 
-		private void NotifyReadingChanged(ReadingChangedEventArgs e) {
+		protected void NotifyReadingChanged(ReadingChangedEventArgs e) {
 			if (ReadingChanged != null) ReadingChanged(this, e);
 		}
 
