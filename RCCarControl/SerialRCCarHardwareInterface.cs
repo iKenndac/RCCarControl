@@ -25,7 +25,7 @@ namespace RCCarControl
 	/// the sensor module (i.e., an Arduino with stuff attached) and managing
 	/// objects representing the various sensors and servos attached to it.
 	/// </summary>
-	public class SerialRCCarHardwareInterface : IRCCarHardwareInterface {
+	public class SerialRCCarHardwareInterface : IRCCarHardwareInterface, IDisposable {
 
 		public enum UltrasonicSensorIndex : int {
 			FrontLeft = 0,
@@ -56,12 +56,20 @@ namespace RCCarControl
 				string line = (string)e.UserState;
 				HandleLineFromSerialPort(line);
 			};
+			SerialPortWorker.RunWorkerCompleted += delegate(object sender, RunWorkerCompletedEventArgs e) {
+				if (e.Error != null)
+					Console.Out.WriteLine("Communication thread failed with: {0}: {1}", e.Error.GetType().FullName, e.Error.Message);
+				else
+					Console.Out.WriteLine("Communication thread finished normally.");
+			};
 			SerialPortWorker.RunWorkerAsync(portPath);
 
 		}
 
-		~SerialRCCarHardwareInterface() {
+		public void Dispose() {
 			SerialPortWorker.CancelAsync();
+			while (SerialPortWorker.IsBusy)
+				Thread.Sleep(TimeSpan.FromMilliseconds(10));
 		}
 
 		public UltrasonicSensor[] FrontUltrasonicSensors { get; private set; }
