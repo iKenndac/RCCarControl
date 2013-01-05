@@ -1,21 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RCCarControl/SerialRCCarHardwareInterface.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RCCarControl/Main.cs">
     <Files>
-      <File FileName="RCCarControl/Main.cs" Line="16" Column="1" />
-      <File FileName="RCCarControl/SerialRCCarHardwareInterface.cs" Line="56" Column="17" />
-      <File FileName="RCCarControl/Sensor.cs" Line="20" Column="45" />
-      <File FileName="RCCarControl/UltrasonicSensor.cs" Line="8" Column="4" />
+      <File FileName="RCCarControl/SerialRCCarHardwareInterface.cs" Line="187" Column="64" />
+      <File FileName="RCCarControl/Sensor.cs" Line="20" Column="18" />
+      <File FileName="RCCarControl/UltrasonicSensor.cs" Line="24" Column="61" />
       <File FileName="RCCarControl/AccelerometorSensor.cs" Line="12" Column="31" />
       <File FileName="RCCarControl/AssemblyInfo.cs" Line="28" Column="1" />
       <File FileName="RCCarControl/Servo.cs" Line="21" Column="5" />
+      <File FileName="RCCarControl/Main.cs" Line="16" Column="47" />
+      <File FileName="RCCarControl/RCCarHTTPServer.cs" Line="11" Column="19" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="RCCarControl" expanded="True">
-            <Node name="SerialRCCarHardwareInterface.cs" selected="True" />
-          </Node>
+          <Node name="RCCarControl" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>

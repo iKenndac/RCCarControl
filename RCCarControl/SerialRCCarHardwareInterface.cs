@@ -46,8 +46,6 @@ namespace RCCarControl
 			ThrottleServo = new Servo(this);
 			SteeringServo = new Servo(this);
 
-			Console.Out.WriteLine("Hi!");
-
 			SerialPortWorker = new BackgroundWorker();
 			SerialPortWorker.WorkerReportsProgress = true;
 			SerialPortWorker.WorkerSupportsCancellation = true;
@@ -185,6 +183,8 @@ namespace RCCarControl
 			string portName = (string)e.Argument;
 			SerialPort port = new SerialPort(portName, 9600, Parity.None, 8, StopBits.One);
 			port.Open();
+
+			Console.Out.WriteLine("Connected to car on {0}.", portName);
 
 			// Opening the serial port causes an Arduino reset, so we
 			// need to wait a bit before allowing commands to be sent.

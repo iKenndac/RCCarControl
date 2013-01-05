@@ -16,7 +16,7 @@ namespace RCCarControl {
 		private Thread ResponseThread { get; set; }
 		private IRCCarHardwareInterface Car { get; set; }
 
-		public RCCarHTTPServer(IRCCarHardwareInterface car) {
+		public RCCarHTTPServer(IRCCarHardwareInterface car, int port) {
 
 			if (car == null)
 				throw new ArgumentNullException("car", "Car cannot be null.");
@@ -24,7 +24,7 @@ namespace RCCarControl {
 			Car = car;
 
 			Listener = new HttpListener();
-			Listener.Prefixes.Add("http://+:8080/");
+			Listener.Prefixes.Add(String.Format("http://+:{0}/", port));
 			Listener.Start();
 
 			ResponseThread = new Thread(HandleRequests);
