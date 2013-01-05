@@ -19,6 +19,12 @@ namespace RCCarControl
 
 		bool ApplyValueToServo(double value, Servo servo);
 	}
+
+	public enum UltrasonicSensorIndex : int {
+		FrontLeft = 0,
+		FrontMiddle = 1,
+		FrontRight = 2
+	}
 	
 	/// <summary>
 	/// RC car hardware interface. This class is responsible for talking to
@@ -26,12 +32,6 @@ namespace RCCarControl
 	/// objects representing the various sensors and servos attached to it.
 	/// </summary>
 	public class SerialRCCarHardwareInterface : IRCCarHardwareInterface, IDisposable {
-
-		public enum UltrasonicSensorIndex : int {
-			FrontLeft = 0,
-			FrontMiddle = 1,
-			FrontRight = 2
-		}
 
 		public SerialRCCarHardwareInterface (String portPath)
 		{

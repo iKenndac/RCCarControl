@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Net;
 
 namespace RCCarControl
 {
@@ -17,27 +18,31 @@ namespace RCCarControl
 		}
 
 		static SerialRCCarHardwareInterface Car { get; set; }
+		static RCCarHTTPServer Server { get; set; }
 
 		static void BackgroundWork() {
 
 			Car = new SerialRCCarHardwareInterface("/dev/cu.usbmodemfa131");
+			Server = new RCCarHTTPServer(Car);
 
 			Car.RearUltrasonicSensor.ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
 				Console.Out.WriteLine("Rear Sensor changed to {0}.", sender.DisplayReading);
 			};
 
-			Car.FrontUltrasonicSensors[(int)SerialRCCarHardwareInterface.UltrasonicSensorIndex.FrontLeft].ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
+			Car.FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontLeft].ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
 				Console.Out.WriteLine("Front Left Sensor changed to {0}.", sender.DisplayReading);
 			};
 			
-			Car.FrontUltrasonicSensors[(int)SerialRCCarHardwareInterface.UltrasonicSensorIndex.FrontRight].ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
+			Car.FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontRight].ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
 				Console.Out.WriteLine("Front Right Sensor changed to {0}.", sender.DisplayReading);
 			};
 			
-			Car.FrontUltrasonicSensors[(int)SerialRCCarHardwareInterface.UltrasonicSensorIndex.FrontMiddle].ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
+			Car.FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontMiddle].ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
 				Console.Out.WriteLine("Front Middle Sensor changed to {0}.", sender.DisplayReading);
 			};
 
+			if (HttpListener.IsSupported)
+				Console.Out.WriteLine("Yay!");
 
 			// When we're done, we "set" the wait handle, which allows the program to shutdown...
 			//mre.Set();
