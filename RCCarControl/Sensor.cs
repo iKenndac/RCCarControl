@@ -17,6 +17,10 @@ namespace RCCarControl
 			get { return "Unknown Sensor"; }
 		}
 
+		public virtual String DisplayReading {
+			get { return "Unknown"; }
+		}
+
 		protected void NotifyReadingChanged(ReadingChangedEventArgs e) {
 			if (ReadingChanged != null) ReadingChanged(this, e);
 		}

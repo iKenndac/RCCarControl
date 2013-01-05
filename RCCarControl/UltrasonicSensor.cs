@@ -20,6 +20,10 @@ namespace RCCarControl {
 			}
 		}
 
+		public override String DisplayReading {
+			get { return string.Format("{0}cm", DistanceReadingCM); }
+		}
+
 		String Name {
 			get { return "Ultrasonic Sensor"; }
 		}
