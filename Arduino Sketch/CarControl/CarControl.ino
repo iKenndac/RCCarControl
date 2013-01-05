@@ -20,7 +20,7 @@
 #include <NewPing.h>
 
 static const int kSonarSensorCount = 4; // Number of sensors.
-static const int kSonarMaxDistance = 300; // Maximum distance (in cm) to ping.
+static const int kSonarMaxDistance = 380; // Maximum distance (in cm) to ping.
 static const int kSonarPingInterval = 33; // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
 
 unsigned long pingTimer[kSonarSensorCount]; // Holds the times when the next ping should happen for each sensor.
