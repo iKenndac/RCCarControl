@@ -108,7 +108,7 @@ namespace RCCarControl
 				message[4] ^= message[index];
 
 			// Since this isn't executed on the communication thread,
-			// we need to lock the message queue and add the message.
+			// we need to lock the message queue to add the message.
 			lock(messageQueue) {
 				messageQueue.Add(message);
 			}
@@ -132,8 +132,19 @@ namespace RCCarControl
 				}
 
 				HandleDistanceUpdate(distances.ToArray());
+				return;
 			}
-			
+
+			if (line.StartsWith("SERVO:")) {
+				string servoMessage = line.Remove(0, "SERVO:".Length).Trim();
+				HandleServoResponse(servoMessage);
+				return;
+			}
+		}
+
+		void HandleServoResponse(string servoMessage) {
+			if (servoMessage != "OK")
+				Console.Out.WriteLine("WARNING: Got servo response: {0}", servoMessage);
 		}
 		
 		private const int kRearDistanceSensorIndex = 3;

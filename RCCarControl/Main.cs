@@ -20,11 +20,8 @@ namespace RCCarControl
 
 		static void BackgroundWork() {
 
-			using (Car = new SerialRCCarHardwareInterface("/dev/cu.usbmodemfa131")) {
-				Thread.Sleep(TimeSpan.FromSeconds(1));
-			}
+			Car = new SerialRCCarHardwareInterface("/dev/cu.usbmodemfa131");
 
-			/*
 			Car.RearUltrasonicSensor.ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
 				Console.Out.WriteLine("Rear Sensor changed to {0}.", sender.DisplayReading);
 			};
@@ -40,7 +37,7 @@ namespace RCCarControl
 			Car.FrontUltrasonicSensors[(int)SerialRCCarHardwareInterface.UltrasonicSensorIndex.FrontMiddle].ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
 				Console.Out.WriteLine("Front Middle Sensor changed to {0}.", sender.DisplayReading);
 			};
-			*/
+
 
 			// When we're done, we "set" the wait handle, which allows the program to shutdown...
 			//mre.Set();
