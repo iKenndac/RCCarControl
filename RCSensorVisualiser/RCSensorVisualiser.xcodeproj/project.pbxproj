@@ -23,15 +23,15 @@
 /* Begin PBXFileReference section */
 		503C41BE169A020800D87876 /* car-side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car-side.png"; sourceTree = "<group>"; };
 		503C41C4169A164F00D87876 /* car-rear.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "car-rear.jpg"; sourceTree = "<group>"; };
-		5050993D1698C05E00C103D2 /* RCDistanceVisualiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCDistanceVisualiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5050993D1698C05E00C103D2 /* RCSensorVisualiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCSensorVisualiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505099411698C05E00C103D2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		505099441698C05E00C103D2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		505099451698C05E00C103D2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		505099461698C05E00C103D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		505099491698C05E00C103D2 /* RCDistanceVisualiser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RCDistanceVisualiser-Info.plist"; sourceTree = "<group>"; };
+		505099491698C05E00C103D2 /* RCSensorVisualiser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RCSensorVisualiser-Info.plist"; sourceTree = "<group>"; };
 		5050994B1698C05E00C103D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5050994D1698C05E00C103D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5050994F1698C05E00C103D2 /* RCDistanceVisualiser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCDistanceVisualiser-Prefix.pch"; sourceTree = "<group>"; };
+		5050994F1698C05E00C103D2 /* RCSensorVisualiser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCSensorVisualiser-Prefix.pch"; sourceTree = "<group>"; };
 		505099511698C05E00C103D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		505099531698C05E00C103D2 /* DKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DKAppDelegate.h; sourceTree = "<group>"; };
 		505099541698C05E00C103D2 /* DKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DKAppDelegate.m; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		505099321698C05E00C103D2 = {
 			isa = PBXGroup;
 			children = (
-				505099471698C05E00C103D2 /* RCDistanceVisualiser */,
+				505099471698C05E00C103D2 /* RCSensorVisualiser */,
 				505099401698C05E00C103D2 /* Frameworks */,
 				5050993E1698C05E00C103D2 /* Products */,
 			);
@@ -67,7 +67,7 @@
 		5050993E1698C05E00C103D2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5050993D1698C05E00C103D2 /* RCDistanceVisualiser.app */,
+				5050993D1698C05E00C103D2 /* RCSensorVisualiser.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,7 +91,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		505099471698C05E00C103D2 /* RCDistanceVisualiser */ = {
+		505099471698C05E00C103D2 /* RCSensorVisualiser */ = {
 			isa = PBXGroup;
 			children = (
 				505099531698C05E00C103D2 /* DKAppDelegate.h */,
@@ -103,7 +103,7 @@
 				5069C24E1699E68700EE88E1 /* DKRCCarOrientationView.m */,
 				505099481698C05E00C103D2 /* Supporting Files */,
 			);
-			path = RCDistanceVisualiser;
+			path = RCSensorVisualiser;
 			sourceTree = "<group>";
 		};
 		505099481698C05E00C103D2 /* Supporting Files */ = {
@@ -112,10 +112,10 @@
 				503C41C4169A164F00D87876 /* car-rear.jpg */,
 				503C41BE169A020800D87876 /* car-side.png */,
 				505099611698C20600C103D2 /* car.png */,
-				505099491698C05E00C103D2 /* RCDistanceVisualiser-Info.plist */,
+				505099491698C05E00C103D2 /* RCSensorVisualiser-Info.plist */,
 				5050994A1698C05E00C103D2 /* InfoPlist.strings */,
 				5050994D1698C05E00C103D2 /* main.m */,
-				5050994F1698C05E00C103D2 /* RCDistanceVisualiser-Prefix.pch */,
+				5050994F1698C05E00C103D2 /* RCSensorVisualiser-Prefix.pch */,
 				505099501698C05E00C103D2 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -124,9 +124,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5050993C1698C05E00C103D2 /* RCDistanceVisualiser */ = {
+		5050993C1698C05E00C103D2 /* RCSensorVisualiser */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5050995B1698C05E00C103D2 /* Build configuration list for PBXNativeTarget "RCDistanceVisualiser" */;
+			buildConfigurationList = 5050995B1698C05E00C103D2 /* Build configuration list for PBXNativeTarget "RCSensorVisualiser" */;
 			buildPhases = (
 				505099391698C05E00C103D2 /* Sources */,
 				5050993A1698C05E00C103D2 /* Frameworks */,
@@ -136,9 +136,9 @@
 			);
 			dependencies = (
 			);
-			name = RCDistanceVisualiser;
+			name = RCSensorVisualiser;
 			productName = RCDistanceVisualiser;
-			productReference = 5050993D1698C05E00C103D2 /* RCDistanceVisualiser.app */;
+			productReference = 5050993D1698C05E00C103D2 /* RCSensorVisualiser.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -151,7 +151,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Daniel Kennett";
 			};
-			buildConfigurationList = 505099371698C05E00C103D2 /* Build configuration list for PBXProject "RCDistanceVisualiser" */;
+			buildConfigurationList = 505099371698C05E00C103D2 /* Build configuration list for PBXProject "RCSensorVisualiser" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -163,7 +163,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5050993C1698C05E00C103D2 /* RCDistanceVisualiser */,
+				5050993C1698C05E00C103D2 /* RCSensorVisualiser */,
 			);
 		};
 /* End PBXProject section */
@@ -284,9 +284,9 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RCDistanceVisualiser/RCDistanceVisualiser-Prefix.pch";
-				INFOPLIST_FILE = "RCDistanceVisualiser/RCDistanceVisualiser-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "RCSensorVisualiser/RCSensorVisualiser-Prefix.pch";
+				INFOPLIST_FILE = "RCSensorVisualiser/RCSensorVisualiser-Info.plist";
+				PRODUCT_NAME = RCSensorVisualiser;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -296,9 +296,9 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RCDistanceVisualiser/RCDistanceVisualiser-Prefix.pch";
-				INFOPLIST_FILE = "RCDistanceVisualiser/RCDistanceVisualiser-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "RCSensorVisualiser/RCSensorVisualiser-Prefix.pch";
+				INFOPLIST_FILE = "RCSensorVisualiser/RCSensorVisualiser-Info.plist";
+				PRODUCT_NAME = RCSensorVisualiser;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -306,7 +306,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		505099371698C05E00C103D2 /* Build configuration list for PBXProject "RCDistanceVisualiser" */ = {
+		505099371698C05E00C103D2 /* Build configuration list for PBXProject "RCSensorVisualiser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				505099591698C05E00C103D2 /* Debug */,
@@ -315,7 +315,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5050995B1698C05E00C103D2 /* Build configuration list for PBXNativeTarget "RCDistanceVisualiser" */ = {
+		5050995B1698C05E00C103D2 /* Build configuration list for PBXNativeTarget "RCSensorVisualiser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5050995C1698C05E00C103D2 /* Debug */,
