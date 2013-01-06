@@ -138,6 +138,36 @@ namespace RCCarControl
 				HandleServoResponse(servoMessage);
 				return;
 			}
+
+			if (line.StartsWith("ACCEL:")) {
+
+				string accelString = line.Remove(0, "ACCEL:".Length).Trim();
+				string[] accelStrings = accelString.Split(',');
+				List<double> accels = new List<double>();
+				foreach (string accelStringRepresentation in accelStrings) {
+					try {
+						accels.Add(Convert.ToDouble(accelStringRepresentation));
+					} catch {
+						accels.Add(0.00);
+					}
+				}
+				
+				HandleAccelerationUpdate(accels.ToArray());
+				return;
+			}
+		}
+
+		void HandleAccelerationUpdate(double[] accels) {
+
+			if (accels.Length != 3) {
+				Console.Out.WriteLine("Got unexpected number of acceleration values: {0}", accels.Length);
+				return;
+			}
+
+			double x = accels[0];
+			double y = accels[1];
+			double z = accels[2];
+			Accelerometor.SetValues(x, y, z);
 		}
 
 		void HandleServoResponse(string servoMessage) {

@@ -27,6 +27,7 @@ namespace RCCarControl
 
 			bool shouldStartHTTPServer = false;
 			bool shouldPrintDistanceChanges = false;
+			bool shouldPrintAccelerometerChanges = false;
 			int httpPort = 8080;
 			string serialPortPath = null;
 
@@ -38,6 +39,7 @@ namespace RCCarControl
 
 				if (arg == "-httpserver") shouldStartHTTPServer = true;
 				if (arg == "-logdistance") shouldPrintDistanceChanges = true;
+				if (arg == "-logaccel") shouldPrintAccelerometerChanges = true;
 
 				if (arg == "-httpport") {
 					argIndex++;
@@ -98,6 +100,13 @@ namespace RCCarControl
 					Console.Out.WriteLine("Front Middle Sensor changed to {0}.", sender.DisplayReading);
 				};
 			}
+
+			if (shouldPrintAccelerometerChanges) {
+				Car.Accelerometor.ReadingChanged += delegate(Sensor sender, ReadingChangedEventArgs e) {
+					Console.Out.WriteLine("Accelerometer changed to: {0}.", sender.DisplayReading);
+				};
+			}
+
 		}
 	}
 }
