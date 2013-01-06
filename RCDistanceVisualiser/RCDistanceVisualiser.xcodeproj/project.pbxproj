@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		503C41BF169A020800D87876 /* car-side.png in Resources */ = {isa = PBXBuildFile; fileRef = 503C41BE169A020800D87876 /* car-side.png */; };
+		503C41C5169A164F00D87876 /* car-rear.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 503C41C4169A164F00D87876 /* car-rear.jpg */; };
 		505099421698C05E00C103D2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505099411698C05E00C103D2 /* Cocoa.framework */; };
 		5050994C1698C05E00C103D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5050994A1698C05E00C103D2 /* InfoPlist.strings */; };
 		5050994E1698C05E00C103D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5050994D1698C05E00C103D2 /* main.m */; };
@@ -15,10 +17,12 @@
 		505099581698C05E00C103D2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505099561698C05E00C103D2 /* MainMenu.xib */; };
 		505099601698C19100C103D2 /* DKRCCarDistancesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5050995F1698C19100C103D2 /* DKRCCarDistancesView.m */; };
 		505099621698C20600C103D2 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 505099611698C20600C103D2 /* car.png */; };
-		5069C24F1699E68700EE88E1 /* DKCarOrientationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5069C24E1699E68700EE88E1 /* DKCarOrientationView.m */; };
+		5069C24F1699E68700EE88E1 /* DKRCCarOrientationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5069C24E1699E68700EE88E1 /* DKRCCarOrientationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		503C41BE169A020800D87876 /* car-side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car-side.png"; sourceTree = "<group>"; };
+		503C41C4169A164F00D87876 /* car-rear.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "car-rear.jpg"; sourceTree = "<group>"; };
 		5050993D1698C05E00C103D2 /* RCDistanceVisualiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCDistanceVisualiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505099411698C05E00C103D2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		505099441698C05E00C103D2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -35,8 +39,8 @@
 		5050995E1698C19100C103D2 /* DKRCCarDistancesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKRCCarDistancesView.h; sourceTree = "<group>"; };
 		5050995F1698C19100C103D2 /* DKRCCarDistancesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKRCCarDistancesView.m; sourceTree = "<group>"; };
 		505099611698C20600C103D2 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
-		5069C24D1699E68700EE88E1 /* DKCarOrientationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCarOrientationView.h; sourceTree = "<group>"; };
-		5069C24E1699E68700EE88E1 /* DKCarOrientationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCarOrientationView.m; sourceTree = "<group>"; };
+		5069C24D1699E68700EE88E1 /* DKRCCarOrientationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKRCCarOrientationView.h; sourceTree = "<group>"; };
+		5069C24E1699E68700EE88E1 /* DKRCCarOrientationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKRCCarOrientationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +99,8 @@
 				505099561698C05E00C103D2 /* MainMenu.xib */,
 				5050995E1698C19100C103D2 /* DKRCCarDistancesView.h */,
 				5050995F1698C19100C103D2 /* DKRCCarDistancesView.m */,
-				5069C24D1699E68700EE88E1 /* DKCarOrientationView.h */,
-				5069C24E1699E68700EE88E1 /* DKCarOrientationView.m */,
+				5069C24D1699E68700EE88E1 /* DKRCCarOrientationView.h */,
+				5069C24E1699E68700EE88E1 /* DKRCCarOrientationView.m */,
 				505099481698C05E00C103D2 /* Supporting Files */,
 			);
 			path = RCDistanceVisualiser;
@@ -105,6 +109,8 @@
 		505099481698C05E00C103D2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				503C41C4169A164F00D87876 /* car-rear.jpg */,
+				503C41BE169A020800D87876 /* car-side.png */,
 				505099611698C20600C103D2 /* car.png */,
 				505099491698C05E00C103D2 /* RCDistanceVisualiser-Info.plist */,
 				5050994A1698C05E00C103D2 /* InfoPlist.strings */,
@@ -171,6 +177,8 @@
 				505099521698C05E00C103D2 /* Credits.rtf in Resources */,
 				505099581698C05E00C103D2 /* MainMenu.xib in Resources */,
 				505099621698C20600C103D2 /* car.png in Resources */,
+				503C41BF169A020800D87876 /* car-side.png in Resources */,
+				503C41C5169A164F00D87876 /* car-rear.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +192,7 @@
 				5050994E1698C05E00C103D2 /* main.m in Sources */,
 				505099551698C05E00C103D2 /* DKAppDelegate.m in Sources */,
 				505099601698C19100C103D2 /* DKRCCarDistancesView.m in Sources */,
-				5069C24F1699E68700EE88E1 /* DKCarOrientationView.m in Sources */,
+				5069C24F1699E68700EE88E1 /* DKRCCarOrientationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

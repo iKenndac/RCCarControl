@@ -8,13 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DKRCCarDistancesView.h"
-#import "DKCarOrientationView.h"
+#import "DKRCCarOrientationView.h"
 
 @interface DKAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet DKRCCarDistancesView *carView;
-@property (weak) IBOutlet DKCarOrientationView *orientationView;
+@property (weak) IBOutlet DKRCCarOrientationView *orientationView;
 
 - (IBAction)connectToEndpoint:(id)sender;
 

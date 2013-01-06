@@ -62,7 +62,7 @@
 	NSURL *endpointURL = [NSURL URLWithString:endpoint];
 
 	NSURLRequest *request = [NSURLRequest requestWithURL:endpointURL
-											 cachePolicy:NSURLCacheStorageNotAllowed
+											 cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 										 timeoutInterval:0.2];
 
 	[NSURLConnection sendAsynchronousRequest:request
@@ -115,7 +115,6 @@
 							   [self.orientationView setNeedsDisplay:YES];
 							   
 						   }];
-
 }
 
 @end

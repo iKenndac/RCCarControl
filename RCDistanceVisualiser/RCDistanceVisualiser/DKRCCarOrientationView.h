@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DKCarOrientationView : NSView
+@interface DKRCCarOrientationView : NSView
 
 @property (nonatomic, readwrite) double x;
 @property (nonatomic, readwrite) double y;
