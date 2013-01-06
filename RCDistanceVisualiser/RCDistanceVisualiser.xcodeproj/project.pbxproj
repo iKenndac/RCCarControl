@@ -15,6 +15,7 @@
 		505099581698C05E00C103D2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505099561698C05E00C103D2 /* MainMenu.xib */; };
 		505099601698C19100C103D2 /* DKRCCarDistancesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5050995F1698C19100C103D2 /* DKRCCarDistancesView.m */; };
 		505099621698C20600C103D2 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 505099611698C20600C103D2 /* car.png */; };
+		5069C24F1699E68700EE88E1 /* DKCarOrientationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5069C24E1699E68700EE88E1 /* DKCarOrientationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		5050995E1698C19100C103D2 /* DKRCCarDistancesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKRCCarDistancesView.h; sourceTree = "<group>"; };
 		5050995F1698C19100C103D2 /* DKRCCarDistancesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKRCCarDistancesView.m; sourceTree = "<group>"; };
 		505099611698C20600C103D2 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		5069C24D1699E68700EE88E1 /* DKCarOrientationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCarOrientationView.h; sourceTree = "<group>"; };
+		5069C24E1699E68700EE88E1 /* DKCarOrientationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCarOrientationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				505099561698C05E00C103D2 /* MainMenu.xib */,
 				5050995E1698C19100C103D2 /* DKRCCarDistancesView.h */,
 				5050995F1698C19100C103D2 /* DKRCCarDistancesView.m */,
+				5069C24D1699E68700EE88E1 /* DKCarOrientationView.h */,
+				5069C24E1699E68700EE88E1 /* DKCarOrientationView.m */,
 				505099481698C05E00C103D2 /* Supporting Files */,
 			);
 			path = RCDistanceVisualiser;
@@ -179,6 +184,7 @@
 				5050994E1698C05E00C103D2 /* main.m in Sources */,
 				505099551698C05E00C103D2 /* DKAppDelegate.m in Sources */,
 				505099601698C19100C103D2 /* DKRCCarDistancesView.m in Sources */,
+				5069C24F1699E68700EE88E1 /* DKCarOrientationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +314,7 @@
 				5050995D1698C05E00C103D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

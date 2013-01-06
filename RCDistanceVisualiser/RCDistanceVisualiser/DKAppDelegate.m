@@ -91,10 +91,11 @@
 																					  options:0
 																						error:nil];
 
-							   NSUInteger frontLeft = [values[@"FrontLeftDistance"] unsignedIntegerValue];
-							   NSUInteger frontMiddle = [values[@"FrontMiddleDistance"] unsignedIntegerValue];
-							   NSUInteger frontRight = [values[@"FrontRightDistance"] unsignedIntegerValue];
-							   NSUInteger rear = [values[@"RearDistance"] unsignedIntegerValue];
+							   NSDictionary *distanceValues = values[@"distances"];
+							   NSUInteger frontLeft = [distanceValues[@"FrontLeftDistance"] unsignedIntegerValue];
+							   NSUInteger frontMiddle = [distanceValues[@"FrontMiddleDistance"] unsignedIntegerValue];
+							   NSUInteger frontRight = [distanceValues[@"FrontRightDistance"] unsignedIntegerValue];
+							   NSUInteger rear = [distanceValues[@"RearDistance"] unsignedIntegerValue];
 
 							   self.carView.frontLeftDistance = frontLeft;
 							   self.carView.frontMiddleDistance = frontMiddle;
@@ -103,6 +104,16 @@
 
 							   [self.carView setNeedsDisplay:YES];
 
+							   NSDictionary *accelerometerValues = values[@"accelerometer"];
+							   double x = [accelerometerValues[@"x"] doubleValue];
+							   double y = [accelerometerValues[@"y"] doubleValue];
+							   double z = [accelerometerValues[@"z"] doubleValue];
+
+							   self.orientationView.x = x;
+							   self.orientationView.y = y;
+							   self.orientationView.z = z;
+							   [self.orientationView setNeedsDisplay:YES];
+							   
 						   }];
 
 }
