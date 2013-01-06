@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Net;
+using System.IO;
 
 namespace RCCarControl
 {
@@ -26,20 +27,58 @@ namespace RCCarControl
 
 			bool shouldStartHTTPServer = false;
 			bool shouldPrintDistanceChanges = false;
+			int httpPort = 8080;
+			string serialPortPath = null;
 
-			foreach (string arg in applicationArguments) {
-				if (arg == "-httpserver")
-					shouldStartHTTPServer = true;
-				if (arg == "-logdistance")
-					shouldPrintDistanceChanges = true;
+			// ---- Command line argument parsing
+
+			for (int argIndex = 0; argIndex < applicationArguments.Length; argIndex++) {
+
+				string arg = applicationArguments[argIndex];
+
+				if (arg == "-httpserver") shouldStartHTTPServer = true;
+				if (arg == "-logdistance") shouldPrintDistanceChanges = true;
+
+				if (arg == "-httpport") {
+					argIndex++;
+					try {
+						string portString = applicationArguments[argIndex];
+						httpPort = Convert.ToInt32(portString);
+					} catch {
+						Console.Out.WriteLine("Fatal: Invalid HTTP port.");
+						mre.Set();
+						return;
+					}
+				}
+
+				if (arg == "-serialport") {
+					argIndex++;
+					try {
+						serialPortPath = applicationArguments[argIndex];
+					} catch {}
+				}
+
 			}
 
-			Car = new SerialRCCarHardwareInterface("/dev/cu.usbmodemfa131");
+			if (serialPortPath == null) {
+				Console.Out.WriteLine("Fatal: No serial port given. Set with -serialport.");
+				mre.Set();
+				return;
+			}
+
+			if (!File.Exists(serialPortPath)) {
+				Console.Out.WriteLine("Fatal: Serial port {0} doesn't exist!", serialPortPath);
+				mre.Set();
+				return;
+			}
+
+			// ---- Interfacing with the car
+
+			Car = new SerialRCCarHardwareInterface(serialPortPath);
 
 			if (shouldStartHTTPServer) {
-				int port = 8080;
-				Server = new RCCarHTTPServer(Car, port);
-				Console.Out.WriteLine("Started HTTP server on port {0}.", port);
+				Server = new RCCarHTTPServer(Car, httpPort);
+				Console.Out.WriteLine("Started HTTP server on port {0}.", httpPort);
 			}
 
 			if (shouldPrintDistanceChanges) {
@@ -59,9 +98,6 @@ namespace RCCarControl
 					Console.Out.WriteLine("Front Middle Sensor changed to {0}.", sender.DisplayReading);
 				};
 			}
-
-			// When we're done, we "set" the wait handle, which allows the program to shutdown...
-			//mre.Set();
 		}
 	}
 }
