@@ -50,6 +50,7 @@
     <Compile Include="Sensors\AccelerometorSensor.cs" />
     <Compile Include="Sensors\Sensor.cs" />
     <Compile Include="Sensors\UltrasonicSensor.cs" />
+    <Compile Include="Sensors\CompassSensor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
