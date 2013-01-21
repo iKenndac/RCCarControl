@@ -21,6 +21,11 @@ namespace RCCarControl
 			get { return "Unknown"; }
 		}
 
+		public DateTime ReadingTime {
+			get;
+			protected set;
+		}
+
 		protected void NotifyReadingChanged(ReadingChangedEventArgs e) {
 			if (ReadingChanged != null) ReadingChanged(this, e);
 		}

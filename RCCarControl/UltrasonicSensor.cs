@@ -15,6 +15,7 @@ namespace RCCarControl {
 			internal set {
 				if (value != _distanceReadingCM) {
 					_distanceReadingCM = value;
+					ReadingTime = DateTime.Now;
 					NotifyReadingChanged(new ReadingChangedEventArgs());
 				}
 			}

@@ -15,6 +15,7 @@ namespace RCCarControl {
 			_x = x;
 			_y = y;
 			_z = z;
+			ReadingTime = DateTime.Now;
 			NotifyReadingChanged(new ReadingChangedEventArgs());
 		}
 
