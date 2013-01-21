@@ -17,6 +17,7 @@ namespace RCCarControl
 		Servo ThrottleServo { get; }
 		Servo SteeringServo { get; }
 
+		RCCarState CreateState();
 		bool ApplyValueToServo(double value, Servo servo);
 	}
 
@@ -76,6 +77,41 @@ namespace RCCarControl
 		public Servo ThrottleServo { get; private set; }
 		public Servo SteeringServo { get; private set; }
 		private BackgroundWorker SerialPortWorker { get; set; }
+
+
+		/// <summary>
+		/// Creates an immutable copy of the interface's current state.
+		/// </summary>
+		/// <returns>
+		/// The state.
+		/// </returns>
+		public RCCarState CreateState() {
+			RCCarState state = new RCCarState();
+
+			state.Accelerometer = new AccelerometorSensor();
+			state.Accelerometer.SetValues(Accelerometor.X, Accelerometor.Y, Accelerometor.Z);
+
+			state.RearUltrasonicSensor = new UltrasonicSensor();
+			state.RearUltrasonicSensor.DistanceReadingCM = RearUltrasonicSensor.DistanceReadingCM;
+
+			state.FrontUltrasonicSensors = new UltrasonicSensor[] {
+				new UltrasonicSensor(),
+				new UltrasonicSensor(),
+				new UltrasonicSensor()
+			};
+
+			state.FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontLeft].DistanceReadingCM = FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontLeft].DistanceReadingCM;
+			state.FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontMiddle].DistanceReadingCM = FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontMiddle].DistanceReadingCM;
+			state.FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontRight].DistanceReadingCM = FrontUltrasonicSensors[(int)UltrasonicSensorIndex.FrontRight].DistanceReadingCM;
+
+			state.SteeringServo = new Servo(null);
+			state.SteeringServo.Value = SteeringServo.Value;
+
+			state.ThrottleServo = new Servo(null);
+			state.ThrottleServo.Value = ThrottleServo.Value;
+
+			return state;
+		}
 
 		public bool ApplyValueToServo(double value, Servo servo) {
 

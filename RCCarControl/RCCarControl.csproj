@@ -46,6 +46,7 @@
     <Compile Include="Servo.cs" />
     <Compile Include="SerialRCCarHardwareInterface.cs" />
     <Compile Include="RCCarHTTPServer.cs" />
+    <Compile Include="RCCarState.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
