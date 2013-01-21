@@ -40,9 +40,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Sensor.cs" />
-    <Compile Include="UltrasonicSensor.cs" />
-    <Compile Include="AccelerometorSensor.cs" />
     <Compile Include="Servo.cs" />
     <Compile Include="SerialRCCarHardwareInterface.cs" />
     <Compile Include="RCCarHTTPServer.cs" />
@@ -50,9 +47,13 @@
     <Compile Include="Event Loop\RCCarInterruptHandler.cs" />
     <Compile Include="RCCarState.cs" />
     <Compile Include="Event Loop\RCCarAIHandler.cs" />
+    <Compile Include="Sensors\AccelerometorSensor.cs" />
+    <Compile Include="Sensors\Sensor.cs" />
+    <Compile Include="Sensors\UltrasonicSensor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Event Loop\" />
+    <Folder Include="Sensors\" />
   </ItemGroup>
 </Project>
