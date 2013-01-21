@@ -15,7 +15,8 @@ namespace RCCarControl {
 		public double Value {
 			get { return _value; }
 			set {
-				if (_hardwareInterface.ApplyValueToServo(value, this)) {
+				if (_hardwareInterface == null || _hardwareInterface.ApplyValueToServo(value, this)) {
+					// ^ Allow setting the value when there's no hardware interface.
 					_value = value;
 				}
 			}
