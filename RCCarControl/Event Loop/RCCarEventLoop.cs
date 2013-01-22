@@ -168,8 +168,10 @@ namespace RCCarControl {
 			if (_aiWorker == null) return;
 
 			_aiWorker.CancelAsync();
-			while (_aiWorker.IsBusy)
-				Thread.Sleep(TimeSpan.FromMilliseconds(10));
+			// Check for null below since the _aiWorker gets cleared
+			// out to null when it's finished.
+			while (_aiWorker != null && _aiWorker.IsBusy)
+				Thread.Sleep(TimeSpan.FromMilliseconds(1));
 
 		}
 
