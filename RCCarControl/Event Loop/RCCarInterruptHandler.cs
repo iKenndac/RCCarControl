@@ -10,7 +10,7 @@ namespace RCCarControl {
 		}
 
 		public virtual bool ShouldTriggerInterruptWithState(RCCarState state) {
-			throw new NotImplementedException();
+			return false;
 		} 
 	}
 }

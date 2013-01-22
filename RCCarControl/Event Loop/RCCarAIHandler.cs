@@ -6,7 +6,10 @@ namespace RCCarControl {
 		}
 
 		public virtual bool PerformAIWork(RCCarState state, double cumulativeThrottleValue, double cumulativeSteeringValue, out double computedThrottleValue, out double computedSteeringValue) {
-			throw new NotImplementedException();
+			computedSteeringValue = cumulativeSteeringValue;
+			computedThrottleValue = cumulativeThrottleValue;
+			System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(100));
+			return false;
 		}
 	}
 }
