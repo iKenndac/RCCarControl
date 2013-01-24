@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCarCore", "RCCarCore\RCCarCore.csproj", "{35252C03-8E6B-49AF-A3C4-2A3240069F9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCarService", "RCCarService\RCCarService.csproj", "{942B9A43-4373-480C-A5C9-4D21C3F131AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,8 +15,12 @@ Global
 		{35252C03-8E6B-49AF-A3C4-2A3240069F9D}.Debug|x86.Build.0 = Debug|x86
 		{35252C03-8E6B-49AF-A3C4-2A3240069F9D}.Release|x86.ActiveCfg = Release|x86
 		{35252C03-8E6B-49AF-A3C4-2A3240069F9D}.Release|x86.Build.0 = Release|x86
+		{942B9A43-4373-480C-A5C9-4D21C3F131AD}.Debug|x86.ActiveCfg = Debug|x86
+		{942B9A43-4373-480C-A5C9-4D21C3F131AD}.Debug|x86.Build.0 = Debug|x86
+		{942B9A43-4373-480C-A5C9-4D21C3F131AD}.Release|x86.ActiveCfg = Release|x86
+		{942B9A43-4373-480C-A5C9-4D21C3F131AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = RCCarCore\RCCarCore.csproj
+		StartupItem = RCCarService\RCCarService.csproj
 	EndGlobalSection
 EndGlobal
