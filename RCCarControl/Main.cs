@@ -20,8 +20,8 @@ namespace RCCarControl
 			mre.WaitOne();
 		}
 
-		static SerialRCCarHardwareInterface Car { get; set; }
-		static RCCarHTTPServer Server { get; set; }
+		static SerialCarHardwareInterface Car { get; set; }
+		static CarHTTPServer Server { get; set; }
 
 		static void BackgroundWork() {
 
@@ -76,10 +76,10 @@ namespace RCCarControl
 
 			// ---- Interfacing with the car
 
-			Car = new SerialRCCarHardwareInterface(serialPortPath);
+			Car = new SerialCarHardwareInterface(serialPortPath);
 
 			if (shouldStartHTTPServer) {
-				Server = new RCCarHTTPServer(Car, httpPort);
+				Server = new CarHTTPServer(Car, httpPort);
 				Console.Out.WriteLine("Started HTTP server on port {0}.", httpPort);
 			}
 

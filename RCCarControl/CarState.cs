@@ -1,8 +1,8 @@
 using System;
 
 namespace RCCarControl {
-	public class RCCarState {
-		public RCCarState() {
+	public class CarState {
+		public CarState() {
 		}
 
 		public Servo SteeringServo { get; set; }

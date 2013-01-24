@@ -21,13 +21,13 @@ namespace RCCarControl {
 	/// not, the next AI loop iteration is fired after the current one finishes. 
 	/// 
 	/// </summary>
-	public class RCCarEventLoop {
+	public class CarEventLoop {
 
 		private const double kInterruptLoopTargetFrequency = 100.0; //Hz
 
-		private List<RCCarInterruptHandler> _interrupts = new List<RCCarInterruptHandler>();
-		private List<RCCarAIHandler> _aiHandlers = new List<RCCarAIHandler>();
-		private IRCCarHardwareInterface _hardwareInterface;
+		private List<InterruptHandler> _interrupts = new List<InterruptHandler>();
+		private List<AIHandler> _aiHandlers = new List<AIHandler>();
+		private ICarHardwareInterface _hardwareInterface;
 
 		// Threading state ------
 		private BackgroundWorker _aiWorker;
@@ -35,7 +35,7 @@ namespace RCCarControl {
 		private ManualResetEvent _interruptThreadEndingEvent;
 		private bool _interruptThreadCanRun = true;
 
-		public RCCarEventLoop(IRCCarHardwareInterface hardwareInterface) {
+		public CarEventLoop(ICarHardwareInterface hardwareInterface) {
 			_hardwareInterface = hardwareInterface;
 		}
 
@@ -101,7 +101,7 @@ namespace RCCarControl {
 		/// <param name='handler'>
 		/// The interrupt handler to add.
 		/// </param>
-		public void AddInterruptHandler(RCCarInterruptHandler handler) {
+		public void AddInterruptHandler(InterruptHandler handler) {
 			if (IsRunning)
 				throw new Exception("Loop state cannot be altered while it's running.");
 
@@ -114,7 +114,7 @@ namespace RCCarControl {
 		/// <param name='handler'>
 		/// The AI handler to add.
 		/// </param>
-		public void AddAIHandler(RCCarAIHandler handler) {
+		public void AddAIHandler(AIHandler handler) {
 			if (IsRunning)
 				throw new Exception("Loop state cannot be altered while it's running.");
 			
@@ -128,9 +128,9 @@ namespace RCCarControl {
 			while (_interruptThreadCanRun) {
 
 				DateTime start = DateTime.Now;
-				RCCarState currentState = _hardwareInterface.CreateState();
+				CarState currentState = _hardwareInterface.CreateState();
 
-				foreach (RCCarInterruptHandler handler in _interrupts) {
+				foreach (InterruptHandler handler in _interrupts) {
 					if (handler.ShouldTriggerInterruptWithState(currentState)) {
 						HandleAllHaltInterrupt();
 						CancelAIWorkerSync();
@@ -195,9 +195,9 @@ namespace RCCarControl {
 
 			double cumulativeThrottle = 0.0;
 			double cumulativeSteering = 0.0;
-			RCCarState state = (RCCarState)e.Argument;
+			CarState state = (CarState)e.Argument;
 
-			foreach (RCCarAIHandler handler in _aiHandlers) {
+			foreach (AIHandler handler in _aiHandlers) {
 
 				if (worker.CancellationPending) {
 					e.Cancel = true;

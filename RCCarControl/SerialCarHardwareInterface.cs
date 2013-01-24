@@ -10,14 +10,14 @@ namespace RCCarControl
 	/// This interface defines the juicy stuff for the RC car hardware
 	/// interface, just in case we want to have multiple implementations.
 	/// </summary>
-	public interface IRCCarHardwareInterface {
+	public interface ICarHardwareInterface {
 		UltrasonicSensor[] FrontUltrasonicSensors { get; }
 		UltrasonicSensor RearUltrasonicSensor { get; }
 		AccelerometorSensor Accelerometor { get; }
 		Servo ThrottleServo { get; }
 		Servo SteeringServo { get; }
 
-		RCCarState CreateState();
+		CarState CreateState();
 		bool ApplyValueToServo(double value, Servo servo);
 	}
 
@@ -32,9 +32,9 @@ namespace RCCarControl
 	/// the sensor module (i.e., an Arduino with stuff attached) and managing
 	/// objects representing the various sensors and servos attached to it.
 	/// </summary>
-	public class SerialRCCarHardwareInterface : IRCCarHardwareInterface, IDisposable {
+	public class SerialCarHardwareInterface : ICarHardwareInterface, IDisposable {
 
-		public SerialRCCarHardwareInterface (String portPath)
+		public SerialCarHardwareInterface (String portPath)
 		{
 			// For now, we're hardcoding our sensors.
 			RearUltrasonicSensor = new UltrasonicSensor();
@@ -85,8 +85,8 @@ namespace RCCarControl
 		/// <returns>
 		/// The state.
 		/// </returns>
-		public RCCarState CreateState() {
-			RCCarState state = new RCCarState();
+		public CarState CreateState() {
+			CarState state = new CarState();
 
 			state.Accelerometer = new AccelerometorSensor();
 			state.Accelerometer.SetValues(Accelerometor.X, Accelerometor.Y, Accelerometor.Z);

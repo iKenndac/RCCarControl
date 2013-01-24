@@ -10,13 +10,13 @@ namespace RCCarControl {
 	/// RC car HTTP server, providing REST-style APIs for getting
 	/// at the car's sensors.
 	/// </summary>
-	public class RCCarHTTPServer {
+	public class CarHTTPServer {
 
 		private HttpListener Listener { get; set; }
 		private Thread ResponseThread { get; set; }
-		private IRCCarHardwareInterface Car { get; set; }
+		private ICarHardwareInterface Car { get; set; }
 
-		public RCCarHTTPServer(IRCCarHardwareInterface car, int port) {
+		public CarHTTPServer(ICarHardwareInterface car, int port) {
 
 			if (car == null)
 				throw new ArgumentNullException("car", "Car cannot be null.");
@@ -31,7 +31,7 @@ namespace RCCarControl {
 			ResponseThread.Start();
 		}
 
-		~RCCarHTTPServer() {
+		~CarHTTPServer() {
 			Listener.Stop();
 		}
 

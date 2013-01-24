@@ -5,9 +5,9 @@ namespace RCCarControl {
 	public class Servo {
 
 		private double _value;
-		private IRCCarHardwareInterface _hardwareInterface;
+		private ICarHardwareInterface _hardwareInterface;
 
-		internal Servo(IRCCarHardwareInterface hardwareInterface) {
+		internal Servo(ICarHardwareInterface hardwareInterface) {
 			_hardwareInterface = hardwareInterface;
 			_value = 0.0;
 		}
