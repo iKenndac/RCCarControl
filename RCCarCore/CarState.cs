@@ -1,6 +1,6 @@
 using System;
 
-namespace RCCarControl {
+namespace RCCarCore {
 	public class CarState {
 		public CarState() {
 		}

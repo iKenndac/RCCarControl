@@ -1,6 +1,6 @@
 using System;
 
-namespace RCCarControl {
+namespace RCCarCore {
 
 	/// <summary>
 	/// RC car interrupt handler.

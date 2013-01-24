@@ -1,6 +1,6 @@
 using System;
 
-namespace RCCarControl {
+namespace RCCarCore {
 	public class AccelerometorSensor : Sensor {
 
 		private double _x, _y, _z;

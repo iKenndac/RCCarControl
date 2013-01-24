@@ -6,9 +6,9 @@
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{35252C03-8E6B-49AF-A3C4-2A3240069F9D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>RCCarControl</RootNamespace>
-    <AssemblyName>RCCarControl</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RCCarCore</RootNamespace>
+    <AssemblyName>RCCarCore</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>True</DebugSymbols>
@@ -19,7 +19,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <Commandlineparameters>-httpserver -httpport 7000 -serialport /dev/cu.usbmodemfa131</Commandlineparameters>
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -38,7 +37,6 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Servo.cs" />
     <Compile Include="Sensors\AccelerometorSensor.cs" />

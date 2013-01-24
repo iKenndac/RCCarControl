@@ -4,7 +4,7 @@ using System.Threading;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 
-namespace RCCarControl {
+namespace RCCarCore {
 	
 	/// <summary>
 	/// RC car HTTP server, providing REST-style APIs for getting

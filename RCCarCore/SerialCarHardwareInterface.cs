@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.ComponentModel;
 
-namespace RCCarControl
+namespace RCCarCore
 {
 	/// <summary>
 	/// This interface defines the juicy stuff for the RC car hardware

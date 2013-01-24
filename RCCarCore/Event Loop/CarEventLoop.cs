@@ -3,7 +3,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Collections.Generic;
 
-namespace RCCarControl {
+namespace RCCarCore {
 
 
 	/// <summary>

@@ -1,6 +1,6 @@
 using System;
 
-namespace RCCarControl {
+namespace RCCarCore {
 	public class CompassSensor : Sensor {
 
 		private int _degrees;
