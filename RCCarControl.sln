@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCarCore", "RCCarCore\RCCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCarService", "RCCarService\RCCarService.csproj", "{942B9A43-4373-480C-A5C9-4D21C3F131AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCarSimulator", "RCCarSimulator\RCCarSimulator.csproj", "{DFB18D52-BE4C-483C-BF8E-908F345FC908}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,8 +21,12 @@ Global
 		{942B9A43-4373-480C-A5C9-4D21C3F131AD}.Debug|x86.Build.0 = Debug|x86
 		{942B9A43-4373-480C-A5C9-4D21C3F131AD}.Release|x86.ActiveCfg = Release|x86
 		{942B9A43-4373-480C-A5C9-4D21C3F131AD}.Release|x86.Build.0 = Release|x86
+		{DFB18D52-BE4C-483C-BF8E-908F345FC908}.Debug|x86.ActiveCfg = Debug|x86
+		{DFB18D52-BE4C-483C-BF8E-908F345FC908}.Debug|x86.Build.0 = Debug|x86
+		{DFB18D52-BE4C-483C-BF8E-908F345FC908}.Release|x86.ActiveCfg = Release|x86
+		{DFB18D52-BE4C-483C-BF8E-908F345FC908}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = RCCarService\RCCarService.csproj
+		StartupItem = RCCarSimulator\RCCarSimulator.csproj
 	EndGlobalSection
 EndGlobal
