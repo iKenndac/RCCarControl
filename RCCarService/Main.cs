@@ -157,21 +157,18 @@ namespace RCCarService {
 					Display.ClearScreen();
 					Display.WriteString("Buttons pushed:", 0, 0);
 					Display.WriteString(buttonsPushed, 1, 0);
-
-
 				};
-				/*
-				display.ClearScreen();
-				display.WriteString("1", 0, 0);
-				display.WriteString("2", 0, 1);
-				display.WriteString("3", 0, 2);
-				display.WriteString("4", 0, 3);
-				display.WriteString("5", 0, 4);
-*/
+
+				string menuButtons = (char)I2CUIDevice.CustomCharacter.Tick + "  " +
+					(char)I2CUIDevice.CustomCharacter.Cross + "  " +
+						(char)I2CUIDevice.CustomCharacter.Left + "  " +
+						(char)I2CUIDevice.CustomCharacter.Right + "  " +
+						(char)I2CUIDevice.CustomCharacter.Up + "  " +
+						(char)I2CUIDevice.CustomCharacter.Down;
+
+				Display.WriteString(menuButtons, 1, 0);
 
 			}
-
-
 		}
 	}
 }

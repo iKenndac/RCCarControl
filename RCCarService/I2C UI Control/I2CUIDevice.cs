@@ -20,13 +20,25 @@ namespace RCCarService {
 			Button1 = 1 << 5
 		}
 
+		public enum CustomCharacter : byte {
+			Tick = 0,
+			Cross = 1,
+			Left = 2,
+			Right = 3,
+			Up = 4,
+			Down = 5
+		}
+
 		public delegate void ButtonsPushedEventHandler(I2CUIDevice sender, ButtonMask buttons);
+
+		/// <summary>
+		/// Fires when buttons are pushed on the device.
+		/// </summary>
 		public event ButtonsPushedEventHandler ButtonsPushed;
 
 		public byte I2CDeviceSlaveAddress { get; private set; }
 		public string I2CDevicePath { get; private set; }
 		public int I2CFileDescriptor { get; set; }
-		private Timer ButtonPollTimer { get; set; }
 
 		public I2CUIDevice(string i2cPath, byte i2cAddress) {
 
@@ -42,6 +54,10 @@ namespace RCCarService {
 			if (ioctl(I2CFileDescriptor, I2C_SLAVE, (byte)(i2cAddress >> 1)) != 0) {
 				Console.Out.WriteLine("Warning (probably fatal): Couldn't set i2c address via ioctl().");
 			}
+
+			// Custom characters
+			DefineCharacters();
+			//ClearScreen();
 
 			// Get any stored button states out of the way.
 			PollButtonStates();
@@ -100,12 +116,15 @@ namespace RCCarService {
 		enum WriteCommand : byte {
 			MoveCursor = 0x11,
 			WriteString = 0x00,
-			ClearScreen = 0x10
+			ClearScreen = 0x10,
+			ScreenDirect = 0x01
 		}
 		
 		enum ReadCommand : byte {
 			PushedButtons = 0x31
 		}
+
+		private Timer ButtonPollTimer { get; set; }
 
 		// Calling ioctl()
 		[DllImport("libc")]
@@ -155,7 +174,8 @@ namespace RCCarService {
 				return null;
 			}
 
-			//I2CStream.Write(data, 0, data.Length);
+			// If we're not expecting any data back, we shouldn't
+			// try to read since we may well block.
 			if (expectedResponseLength == 0)
 				return null;
 
@@ -168,6 +188,102 @@ namespace RCCarService {
 			return readData;
 		}
 
+		private void DefineCharacters() {
+			//http://omerk.github.com/lcdchargen/
+
+			byte[] tickChar = new byte[] {
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000001", 2),
+				Convert.ToByte("00000010", 2),
+				Convert.ToByte("00010100", 2),
+				Convert.ToByte("00001000", 2)
+			};
+
+			byte[] crossChar = new byte[] {
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00010001", 2),
+				Convert.ToByte("00001010", 2),
+				Convert.ToByte("00000100", 2),
+				Convert.ToByte("00001010", 2),
+				Convert.ToByte("00010001", 2)
+			};
+
+			byte[] downChar = new byte[] {
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000100", 2),
+				Convert.ToByte("00000100", 2),
+				Convert.ToByte("00011111", 2),
+				Convert.ToByte("00001110", 2),
+				Convert.ToByte("00000100", 2)
+			};
+
+			byte[] upChar = new byte[] {
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000100", 2),
+				Convert.ToByte("00001110", 2),
+				Convert.ToByte("00011111", 2),
+				Convert.ToByte("00000100", 2),
+				Convert.ToByte("00000100", 2)
+			};
+
+			byte[] leftChar = new byte[] {
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000100", 2),
+				Convert.ToByte("00001100", 2),
+				Convert.ToByte("00011111", 2),
+				Convert.ToByte("00001100", 2),
+				Convert.ToByte("00000100", 2)
+			};
+
+			byte[] rightChar = new byte[] {
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000100", 2),
+				Convert.ToByte("00000110", 2),
+				Convert.ToByte("00011111", 2),
+				Convert.ToByte("00000110", 2),
+				Convert.ToByte("00000100", 2)
+			};
+
+			DefineCharacter(tickChar, CustomCharacter.Tick);
+			DefineCharacter(crossChar, CustomCharacter.Cross);
+			DefineCharacter(leftChar, CustomCharacter.Left);
+			DefineCharacter(rightChar, CustomCharacter.Right);
+			DefineCharacter(upChar, CustomCharacter.Up);
+			DefineCharacter(downChar, CustomCharacter.Down);
+		}
+
+		private void DefineCharacter(byte[] character, CustomCharacter characterNum) {
+			//http://www.bitwizard.nl/wiki/index.php/Lcd_protocol_1.6
+
+			byte screenDirectDefineCharCommand = (byte)(0x40 | ((byte)characterNum << 3));
+
+			byte[] buf = new byte[2];
+			buf[0] = (byte)WriteCommand.ScreenDirect;
+			buf[1] = screenDirectDefineCharCommand;
+
+			WriteToDevice(buf);
+			WriteToDevice(character);
+			Write8BitRegister(WriteCommand.MoveCursor, 0);
+		}
 	}
 }
 
