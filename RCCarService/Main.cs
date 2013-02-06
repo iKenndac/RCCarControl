@@ -2,7 +2,11 @@ using System;
 using System.Threading;
 using System.Net;
 using System.IO;
+
+namespace RCCarControl
+{
 using RCCarCore;
+	{
 
 namespace RCCarService {
 	class MainClass {
@@ -18,10 +22,11 @@ namespace RCCarService {
 			// Block until our ManualResetEvent is set
 			mre.WaitOne();
 		}
-		
-		static SerialCarHardwareInterface Car { get; set; }
-		static CarHTTPServer Server { get; set; }
-		
+
+		static SerialRCCarHardwareInterface Car { get; set; }
+		static RCCarHTTPServer Server { get; set; }
+		static RCCarEventLoop Loop { get; set; }
+
 		static void BackgroundWork() {
 			
 			bool shouldStartHTTPServer = false;
@@ -105,7 +110,23 @@ namespace RCCarService {
 					Console.Out.WriteLine("Accelerometer changed to: {0}.", sender.DisplayReading);
 				};
 			}
-			
+
+			// Loop
+			Loop = new RCCarEventLoop(Car);
+			Loop.AddAIHandler(new RCCarAIHandler());
+			Loop.AddInterruptHandler(new RCCarInterruptHandler());
+			Loop.StartLoop();
+
+			Thread.Sleep(TimeSpan.FromSeconds(2));
+			Loop.StopLoop();
+
+			Thread.Sleep(TimeSpan.FromSeconds(2));
+			Loop.StartLoop();
+
+			Thread.Sleep(TimeSpan.FromSeconds(2));
+			Loop.StopLoop();
+
+
 		}
 	}
 }
