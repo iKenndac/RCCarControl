@@ -27,6 +27,6 @@ Global
 		{DFB18D52-BE4C-483C-BF8E-908F345FC908}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = RCCarSimulator\RCCarSimulator.csproj
+		StartupItem = RCCarService\RCCarService.csproj
 	EndGlobalSection
 EndGlobal
