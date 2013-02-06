@@ -38,15 +38,8 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Servo.cs" />
-    <Compile Include="SerialRCCarHardwareInterface.cs" />
-    <Compile Include="RCCarHTTPServer.cs" />
-    <Compile Include="Event Loop\RCCarEventLoop.cs" />
-    <Compile Include="Event Loop\RCCarInterruptHandler.cs" />
-    <Compile Include="RCCarState.cs" />
-    <Compile Include="Event Loop\RCCarAIHandler.cs" />
     <Compile Include="Sensors\AccelerometorSensor.cs" />
     <Compile Include="Sensors\Sensor.cs" />
     <Compile Include="Sensors\UltrasonicSensor.cs" />

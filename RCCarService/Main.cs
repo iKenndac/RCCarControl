@@ -2,11 +2,7 @@ using System;
 using System.Threading;
 using System.Net;
 using System.IO;
-
-namespace RCCarControl
-{
 using RCCarCore;
-	{
 
 namespace RCCarService {
 	class MainClass {
@@ -23,9 +19,9 @@ namespace RCCarService {
 			mre.WaitOne();
 		}
 
-		static SerialRCCarHardwareInterface Car { get; set; }
-		static RCCarHTTPServer Server { get; set; }
-		static RCCarEventLoop Loop { get; set; }
+		static SerialCarHardwareInterface Car { get; set; }
+		static CarHTTPServer Server { get; set; }
+		static CarEventLoop Loop { get; set; }
 
 		static void BackgroundWork() {
 			
@@ -112,9 +108,9 @@ namespace RCCarService {
 			}
 
 			// Loop
-			Loop = new RCCarEventLoop(Car);
-			Loop.AddAIHandler(new RCCarAIHandler());
-			Loop.AddInterruptHandler(new RCCarInterruptHandler());
+			Loop = new CarEventLoop(Car);
+			Loop.AddAIHandler(new AIHandler());
+			Loop.AddInterruptHandler(new InterruptHandler());
 			Loop.StartLoop();
 
 			Thread.Sleep(TimeSpan.FromSeconds(2));
