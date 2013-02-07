@@ -159,6 +159,25 @@ namespace RCCarService {
 				};
 				sensorMenu.AddChild(throttleMenuItem);
 
+				// --
+
+				MenuItem exitMenuItem = new MenuItem("Exit");
+				exitMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
+					ConfirmationPromptInfoScreen exitConfirmation = new ConfirmationPromptInfoScreen("Are you sure?");
+					exitConfirmation.RespondToPrompt += delegate(ConfirmationPromptInfoScreen prompt, bool confirm) {
+						if (confirm) {
+							Display.ClearScreen();
+							Console.Out.WriteLine("Exiting from menu.");
+							mre.Set();
+							return;
+						}
+					};
+
+					MainMenuController.PresentInfoScreen(exitConfirmation);
+				};
+
+				rootMenu.AddChild(exitMenuItem);
+
 				MainMenuController = new MenuController(Display, rootMenu);
 
 
