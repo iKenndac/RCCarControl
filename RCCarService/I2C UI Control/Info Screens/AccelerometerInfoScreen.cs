@@ -14,7 +14,7 @@ namespace RCCarService {
 		public override void Activate(I2CUIDevice screen) {
 			base.Activate(screen);
 			Device.ClearScreen();
-			Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Left }), 1, 0);
+			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Left, I2CUIDevice.ButtonSymbolPosition.Button1);
 			UpdateScreen();
 			Accelerometer.ReadingChanged += AccelerometerUpdated;
 		}

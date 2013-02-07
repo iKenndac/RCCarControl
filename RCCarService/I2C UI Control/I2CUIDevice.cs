@@ -9,6 +9,10 @@ using System.Runtime.InteropServices;
 namespace RCCarService {
 	public class I2CUIDevice : IDisposable  {
 
+		public static string StringForCharacter(CustomCharacter character) {
+			return Encoding.ASCII.GetString(new byte[] { (byte)character });
+		}
+
 		[Flags]
 		public enum ButtonMask : byte {
 			ButtonNone = 0,
@@ -27,7 +31,8 @@ namespace RCCarService {
 			Right = 3,
 			Up = 4,
 			Down = 5,
-			Ellipsis = 6
+			Ellipsis = 6,
+			Blank = 0x20 // ASCII space
 		}
 
 		public enum ButtonSymbolPosition : byte {
@@ -111,6 +116,10 @@ namespace RCCarService {
 			encodedLocation |= (column & 0x1F);
 			Write8BitRegister(WriteCommand.MoveCursor, (byte)encodedLocation);
 			WriteStringToDevice(str);
+		}
+
+		public void WriteButtonSymbol(CustomCharacter character, ButtonSymbolPosition button) {
+			WriteString(I2CUIDevice.StringForCharacter(character), 1, (byte)button);
 		}
 
 		/// <summary>

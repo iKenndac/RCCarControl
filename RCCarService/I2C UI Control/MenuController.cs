@@ -29,9 +29,9 @@ namespace RCCarService {
 			didHaveSubmenus = false;
 
 			Device.ClearScreen();
-			Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Up }), 1, 6);
-			Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Down }), 1, 9);
-			Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Tick }), 1, 15);
+			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Up, I2CUIDevice.ButtonSymbolPosition.Button3);
+			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Down, I2CUIDevice.ButtonSymbolPosition.Button4);
+			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Tick, I2CUIDevice.ButtonSymbolPosition.Button6);
 		}
 
 		public void ResetScreen() {
@@ -84,14 +84,21 @@ namespace RCCarService {
 
 			bool canGoBack = (CurrentMenu.Parent != null);
 			if (canGoBack != couldGoBack) {
-				Device.WriteString(canGoBack ? Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Left }) : " ", 1, 0);
+				if (canGoBack)
+					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Left, I2CUIDevice.ButtonSymbolPosition.Button1);
+				else
+					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Blank, I2CUIDevice.ButtonSymbolPosition.Button1);
+
 				couldGoBack = canGoBack;
 			}
 
 			bool hasSubmenus = (displayedItem.ChildItems.Length != 0);
 			if (didHaveSubmenus != hasSubmenus) {
-				I2CUIDevice.CustomCharacter character = hasSubmenus ? I2CUIDevice.CustomCharacter.Right : I2CUIDevice.CustomCharacter.Tick;
-				Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)character }), 1, 15);
+				if (hasSubmenus)
+					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Right, I2CUIDevice.ButtonSymbolPosition.Button6);
+				else
+					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Tick, I2CUIDevice.ButtonSymbolPosition.Button6);
+
 				didHaveSubmenus = hasSubmenus;
 			}
 

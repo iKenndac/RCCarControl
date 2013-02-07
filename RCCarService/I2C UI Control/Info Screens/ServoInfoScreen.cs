@@ -16,16 +16,14 @@ namespace RCCarService {
 		public override void Activate(I2CUIDevice screen) {
 			base.Activate(screen);
 			Device.ClearScreen();
+			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Left, I2CUIDevice.ButtonSymbolPosition.Button1);
+			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Up, I2CUIDevice.ButtonSymbolPosition.Button3);
+			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Down, I2CUIDevice.ButtonSymbolPosition.Button4);
 			UpdateScreen();
 		}
 
 		private void UpdateScreen() {
-			Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Left }), 1, 0);
-			Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Up }), 1, 6);
-			Device.WriteString(Encoding.ASCII.GetString(new byte[] { (byte)I2CUIDevice.CustomCharacter.Down }), 1, 9);
-
 			Device.WriteString(String.Format("{0}: {1:0.00}    ", Name, ScreenServo.Value), 0, 0);
-
 		}
 
 		internal override void HandleButtons(I2CUIDevice sender, I2CUIDevice.ButtonMask buttons) {
@@ -60,8 +58,6 @@ namespace RCCarService {
 			
 			UpdateScreen();
 		}
-
-
 	}
 }
 
