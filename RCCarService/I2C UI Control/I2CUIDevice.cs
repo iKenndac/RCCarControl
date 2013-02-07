@@ -26,7 +26,8 @@ namespace RCCarService {
 			Left = 2,
 			Right = 3,
 			Up = 4,
-			Down = 5
+			Down = 5,
+			Ellipsis = 6
 		}
 
 		public delegate void ButtonsPushedEventHandler(I2CUIDevice sender, ButtonMask buttons);
@@ -62,7 +63,7 @@ namespace RCCarService {
 			// Get any stored button states out of the way.
 			PollButtonStates();
 
-			ButtonPollTimer = new Timer(100);
+			ButtonPollTimer = new Timer(250);
 			ButtonPollTimer.AutoReset = true;
 			ButtonPollTimer.Elapsed += delegate(object sender, ElapsedEventArgs e) {
 				PollButtonStates();
@@ -263,12 +264,25 @@ namespace RCCarService {
 				Convert.ToByte("00000100", 2)
 			};
 
+			byte[] ellipsisChar = new byte[] {
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00000000", 2),
+				Convert.ToByte("00010101", 2),
+				Convert.ToByte("00000000", 2)
+			};
+
 			DefineCharacter(tickChar, CustomCharacter.Tick);
 			DefineCharacter(crossChar, CustomCharacter.Cross);
 			DefineCharacter(leftChar, CustomCharacter.Left);
 			DefineCharacter(rightChar, CustomCharacter.Right);
 			DefineCharacter(upChar, CustomCharacter.Up);
 			DefineCharacter(downChar, CustomCharacter.Down);
+			DefineCharacter(ellipsisChar, CustomCharacter.Ellipsis);
 		}
 
 		private void DefineCharacter(byte[] character, CustomCharacter characterNum) {
