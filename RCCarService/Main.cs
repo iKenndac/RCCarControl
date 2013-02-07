@@ -139,6 +139,9 @@ namespace RCCarService {
 				rootMenu.AddChild(sensorMenu);
 
 				MenuItem accelerometerMenuItem = new MenuItem("Accelerometer");
+				accelerometerMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
+					MainMenuController.PresentInfoScreen(new AccelerometerInfoScreen(Car.Accelerometor));
+				};
 				sensorMenu.AddChild(accelerometerMenuItem);
 
 				MenuItem distanceMenuItem = new MenuItem("Distance");
