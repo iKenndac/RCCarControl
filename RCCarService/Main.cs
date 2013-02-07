@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Net;
 using System.IO;
+using System.Diagnostics;
 using RCCarCore;
 
 namespace RCCarService {
@@ -161,13 +162,21 @@ namespace RCCarService {
 
 				// --
 
-				MenuItem exitMenuItem = new MenuItem("Exit");
+				MenuItem exitMenuItem = new MenuItem("Shut down");
 				exitMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
 					ConfirmationPromptInfoScreen exitConfirmation = new ConfirmationPromptInfoScreen("Are you sure?");
 					exitConfirmation.RespondToPrompt += delegate(ConfirmationPromptInfoScreen prompt, bool confirm) {
 						if (confirm) {
 							Display.ClearScreen();
-							Console.Out.WriteLine("Exiting from menu.");
+							Display.WriteString("Goodbye!", 0, 4);
+
+							System.Diagnostics.Process proc = new System.Diagnostics.Process();
+							proc.EnableRaisingEvents=false; 
+							proc.StartInfo.FileName = "shutdown";
+							proc.StartInfo.Arguments = "-h now";
+							proc.Start();
+							proc.WaitForExit();
+
 							mre.Set();
 							return;
 						}
