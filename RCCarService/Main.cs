@@ -23,6 +23,7 @@ namespace RCCarService {
 		static CarHTTPServer Server { get; set; }
 		static CarEventLoop Loop { get; set; }
 		static I2CUIDevice Display { get; set; }
+		static MenuController MainMenuController { get; set; }
 
 		static void BackgroundWork() {
 
@@ -132,41 +133,34 @@ namespace RCCarService {
 
 			if (i2cUIDevicePath != null) {
 				Display = new I2CUIDevice(i2cUIDevicePath, 0x94);
-				Display.ButtonsPushed += delegate(I2CUIDevice sender, I2CUIDevice.ButtonMask buttons) {
 
-					string buttonsPushed = "";
-
-					if ((buttons & I2CUIDevice.ButtonMask.Button1) == I2CUIDevice.ButtonMask.Button1)
-						buttonsPushed += "1 ";
-					
-					if ((buttons & I2CUIDevice.ButtonMask.Button2) == I2CUIDevice.ButtonMask.Button2)
-						buttonsPushed += "2 ";
-					
-					if ((buttons & I2CUIDevice.ButtonMask.Button3) == I2CUIDevice.ButtonMask.Button3)
-						buttonsPushed += "3 ";
-					
-					if ((buttons & I2CUIDevice.ButtonMask.Button4) == I2CUIDevice.ButtonMask.Button4)
-						buttonsPushed += "4 ";
-					
-					if ((buttons & I2CUIDevice.ButtonMask.Button5) == I2CUIDevice.ButtonMask.Button5)
-						buttonsPushed += "5 ";
-					
-					if ((buttons & I2CUIDevice.ButtonMask.Button6) == I2CUIDevice.ButtonMask.Button6)
-						buttonsPushed += "6 ";
-
+				MenuItem withHandlerMenuItem = new MenuItem("Click Me");
+				withHandlerMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
 					Display.ClearScreen();
-					Display.WriteString("Buttons pushed:", 0, 0);
-					Display.WriteString(buttonsPushed, 1, 0);
+					Display.WriteString("Hooray!!!!", 0, 0);
+					Thread.Sleep(2000);
+					MainMenuController.ResetScreen();
 				};
 
-				string menuButtons = (char)I2CUIDevice.CustomCharacter.Tick + "  " +
-					(char)I2CUIDevice.CustomCharacter.Cross + "  " +
-						(char)I2CUIDevice.CustomCharacter.Left + "  " +
-						(char)I2CUIDevice.CustomCharacter.Right + "  " +
-						(char)I2CUIDevice.CustomCharacter.Up + "  " +
-						(char)I2CUIDevice.CustomCharacter.Down;
+				MenuItem rootMenu = new MenuItem();
+				rootMenu.AddChild(new MenuItem("Item 1"));
+				rootMenu.AddChild(withHandlerMenuItem);
+				rootMenu.AddChild(new MenuItem("Item 3"));
 
-				Display.WriteString(menuButtons, 1, 0);
+				MenuItem menu = new MenuItem("Item 4");
+				rootMenu.AddChild(menu);
+
+				menu.AddChild(new MenuItem("Item 4.1"));
+				menu.AddChild(new MenuItem("Item 4.2"));
+
+				MenuItem childMenu = new MenuItem("Item 4.3");
+
+				menu.AddChild(childMenu);
+				childMenu.AddChild(new MenuItem("Item 4.3.1"));
+				childMenu.AddChild(new MenuItem("Item 4.3.2"));
+
+				MainMenuController = new MenuController(Display, rootMenu);
+
 
 			}
 		}

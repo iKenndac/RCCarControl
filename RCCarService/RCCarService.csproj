@@ -39,6 +39,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="I2C UI Control\I2CUIDevice.cs" />
+    <Compile Include="I2C UI Control\MenuItem.cs" />
+    <Compile Include="I2C UI Control\MenuController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
