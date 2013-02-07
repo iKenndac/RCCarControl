@@ -30,6 +30,15 @@ namespace RCCarService {
 			Ellipsis = 6
 		}
 
+		public enum ButtonSymbolPosition : byte {
+			Button1 = 0,
+			Button2 = 3,
+			Button3 = 6,
+			Button4 = 9,
+			Button5 = 12,
+			Button6 = 15
+		}
+
 		public delegate void ButtonsPushedEventHandler(I2CUIDevice sender, ButtonMask buttons);
 
 		/// <summary>
