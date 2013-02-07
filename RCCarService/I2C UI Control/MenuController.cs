@@ -19,7 +19,7 @@ namespace RCCarService {
 
 		private int DisplayedMenuIndex { get; set; }
 		private MenuItem CurrentMenu { get; set; }
-
+		public InfoScreen CurrentInfoScreen { get; private set; }
 
 		private bool couldGoBack;
 		private bool didHaveSubmenus;
@@ -35,8 +35,35 @@ namespace RCCarService {
 		}
 
 		public void ResetScreen() {
+			if (CurrentInfoScreen != null) return;
 			ResetScreenState();
 			UpdateScreen();
+		}
+
+		public void PresentInfoScreen(InfoScreen screen) {
+			CurrentInfoScreen = screen;
+			if (CurrentInfoScreen == null) {
+				DismissInfoScreen();
+				return;
+			}
+
+			CurrentInfoScreen.ReadyToExit += InfoScreenExitHandler;
+			CurrentInfoScreen.Activate(Device);
+		}
+
+		public void DismissInfoScreen() {
+			if (CurrentInfoScreen != null) {
+				CurrentInfoScreen.ReadyToExit -= InfoScreenExitHandler;
+				CurrentInfoScreen.Deactivate();
+				CurrentInfoScreen = null;
+			}
+
+			ResetScreen();
+		}
+
+		private void InfoScreenExitHandler(InfoScreen sender) {
+			if (sender == CurrentInfoScreen)
+				DismissInfoScreen();
 		}
 
 		private void UpdateScreen() {
@@ -71,6 +98,11 @@ namespace RCCarService {
 		}
 
 		private void HandleButtons(I2CUIDevice sender, I2CUIDevice.ButtonMask buttons) {
+
+			if (CurrentInfoScreen != null) {
+				CurrentInfoScreen.HandleButtons(sender, buttons);
+				return;
+			}
 
 			if ((buttons & I2CUIDevice.ButtonMask.Button1) == I2CUIDevice.ButtonMask.Button1)
 				HandleBackButton();

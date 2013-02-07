@@ -134,30 +134,27 @@ namespace RCCarService {
 			if (i2cUIDevicePath != null) {
 				Display = new I2CUIDevice(i2cUIDevicePath, 0x94);
 
-				MenuItem withHandlerMenuItem = new MenuItem("Click Me");
-				withHandlerMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
-					Display.ClearScreen();
-					Display.WriteString("Hooray!!!!", 0, 0);
-					Thread.Sleep(2000);
-					MainMenuController.ResetScreen();
-				};
-
 				MenuItem rootMenu = new MenuItem();
-				rootMenu.AddChild(new MenuItem("Item 1"));
-				rootMenu.AddChild(withHandlerMenuItem);
-				rootMenu.AddChild(new MenuItem("Item 3"));
+				MenuItem sensorMenu = new MenuItem("Sensors & Servos");
+				rootMenu.AddChild(sensorMenu);
 
-				MenuItem menu = new MenuItem("Item 4");
-				rootMenu.AddChild(menu);
+				MenuItem accelerometerMenuItem = new MenuItem("Accelerometer");
+				sensorMenu.AddChild(accelerometerMenuItem);
 
-				menu.AddChild(new MenuItem("Item 4.1"));
-				menu.AddChild(new MenuItem("Item 4.2"));
+				MenuItem distanceMenuItem = new MenuItem("Distance");
+				sensorMenu.AddChild(distanceMenuItem);
 
-				MenuItem childMenu = new MenuItem("Item 4.3");
+				MenuItem steeringMenuItem = new MenuItem("Steering Servo");
+				steeringMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
+					MainMenuController.PresentInfoScreen(new ServoInfoScreen(Car.SteeringServo, "Steering"));
+				};
+				sensorMenu.AddChild(steeringMenuItem);
 
-				menu.AddChild(childMenu);
-				childMenu.AddChild(new MenuItem("Item 4.3.1"));
-				childMenu.AddChild(new MenuItem("Item 4.3.2"));
+				MenuItem throttleMenuItem = new MenuItem("Throttle Servo");
+				throttleMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
+					MainMenuController.PresentInfoScreen(new ServoInfoScreen(Car.ThrottleServo, "Throttle"));
+				};
+				sensorMenu.AddChild(throttleMenuItem);
 
 				MainMenuController = new MenuController(Display, rootMenu);
 
