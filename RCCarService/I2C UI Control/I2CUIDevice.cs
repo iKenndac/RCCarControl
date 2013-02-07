@@ -57,7 +57,7 @@ namespace RCCarService {
 
 			// Custom characters
 			DefineCharacters();
-			//ClearScreen();
+			ClearScreen();
 
 			// Get any stored button states out of the way.
 			PollButtonStates();
@@ -273,6 +273,7 @@ namespace RCCarService {
 
 		private void DefineCharacter(byte[] character, CustomCharacter characterNum) {
 			//http://www.bitwizard.nl/wiki/index.php/Lcd_protocol_1.6
+			//http://code.google.com/p/arduino/source/browse/trunk/libraries/LiquidCrystal/LiquidCrystal.h
 
 			byte screenDirectDefineCharCommand = (byte)(0x40 | ((byte)characterNum << 3));
 
