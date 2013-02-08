@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Timers;
 using RCCarCore;
 
 namespace RCCarService {
@@ -10,22 +11,25 @@ namespace RCCarService {
 		}
 
 		public AccelerometorSensor Accelerometer { get; private set; }
+		private Timer RefreshTimer { get; set; }
 		
 		public override void Activate(I2CUIDevice screen) {
 			base.Activate(screen);
 			Device.ClearScreen();
 			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Left, I2CUIDevice.ButtonSymbolPosition.Button1);
 			UpdateScreen();
-			Accelerometer.ReadingChanged += AccelerometerUpdated;
+			RefreshTimer = new Timer(100);
+			RefreshTimer.AutoReset = true;
+			RefreshTimer.Elapsed += delegate(object sender, ElapsedEventArgs e) {
+				UpdateScreen();
+			};
+			RefreshTimer.Enabled = true;
 		}
 
 		public override void Deactivate() {
 			base.Deactivate();
-			Accelerometer.ReadingChanged -= AccelerometerUpdated;
-		}
-
-		private void AccelerometerUpdated(Sensor sender, ReadingChangedEventArgs e) {
-			UpdateScreen();
+			RefreshTimer.Enabled = false;
+			RefreshTimer = null;
 		}
 
 		private void UpdateScreen() {
