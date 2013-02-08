@@ -154,6 +154,8 @@ namespace RCCarService {
 			byte[] buf = new byte[1];
 			buf[0] = (byte)ReadCommand.PushedButtons;
 			byte[] ret = WriteToDevice(buf, 1);
+			if (ret == null)
+				return;
 
 			ButtonMask buttons = (ButtonMask)ret[0];
 			if (buttons == ButtonMask.ButtonNone)

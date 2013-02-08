@@ -3,10 +3,13 @@ using System.Threading;
 using System.Net;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.Generic;
 using RCCarCore;
 
 namespace RCCarService {
 	class MainClass {
+
+		const string kSettingsFileName = "RCCarService.settings";
 		
 		static ManualResetEvent mre = new ManualResetEvent(false);
 		static string[] applicationArguments;
@@ -18,6 +21,9 @@ namespace RCCarService {
 			ThreadPool.QueueUserWorkItem(o => BackgroundWork());
 			// Block until our ManualResetEvent is set
 			mre.WaitOne();
+
+			if (Display != null)
+				Display.ClearScreen();
 		}
 
 		static SerialCarHardwareInterface Car { get; set; }
@@ -26,7 +32,33 @@ namespace RCCarService {
 		static I2CUIDevice Display { get; set; }
 		static MenuController MainMenuController { get; set; }
 
+		static Dictionary<string, string> GetSettings() {
+
+			Dictionary<string, string> settings = new Dictionary<string, string>();
+
+			if (!File.Exists(kSettingsFileName)) 
+				return settings;
+
+			using (StreamReader reader = new StreamReader(kSettingsFileName)) {
+				while (!reader.EndOfStream) {
+					string line = reader.ReadLine();
+
+					if (line.Trim().StartsWith("#") || line.Trim().Length == 0)
+						continue;
+
+					string[] components = line.Split('=');
+					if (components.Length > 1) {
+						settings.Add(components[0].Trim(), components[1].Trim());
+					}
+				}
+			}
+
+			return settings;
+		}
+
 		static void BackgroundWork() {
+
+			GetSettings();
 
 			bool shouldStartHTTPServer = false;
 			bool shouldPrintDistanceChanges = false;
@@ -34,8 +66,29 @@ namespace RCCarService {
 			int httpPort = 8080;
 			string serialPortPath = null;
 			string i2cUIDevicePath = null;
+
+			// ---- Settings file
+
+			Dictionary<string, string> settings = GetSettings();
+			if (settings.ContainsKey("logdistance"))
+				shouldPrintDistanceChanges = (settings["logdistance"] == "1");
 			
-			// ---- Command line argument parsing
+			if (settings.ContainsKey("logaccel"))
+				shouldPrintAccelerometerChanges = (settings["logaccel"] == "1");
+
+			if (settings.ContainsKey("httpport")) {
+				httpPort = Convert.ToInt32(settings["httpport"]);
+				shouldStartHTTPServer = true;
+			}
+
+			if (settings.ContainsKey("serialport"))
+				serialPortPath = settings["serialport"];
+
+			if (settings.ContainsKey("i2c_ui"))
+				i2cUIDevicePath = settings["i2c_ui"];
+
+
+			// ---- Command line argument parsing (these override settings)
 			
 			for (int argIndex = 0; argIndex < applicationArguments.Length; argIndex++) {
 				
@@ -81,9 +134,7 @@ namespace RCCarService {
 				Console.Out.WriteLine("Warning: No serial port given. Set with -serialport.");
 			} else {
 				if (!File.Exists(serialPortPath)) {
-					Console.Out.WriteLine("Fatal: Serial port {0} doesn't exist!", serialPortPath);
-					mre.Set();
-					return;
+					Console.Out.WriteLine("Warning: Serial port {0} doesn't exist!", serialPortPath);
 				}
 			}
 
@@ -91,9 +142,7 @@ namespace RCCarService {
 				Console.Out.WriteLine("Warning: No UI device path given. Set with -i2c_ui.");
 			} else {
 				if (!File.Exists(i2cUIDevicePath)) {
-					Console.Out.WriteLine("Fatal: UI device {0} doesn't exist!", i2cUIDevicePath);
-					mre.Set();
-					return;
+					Console.Out.WriteLine("Warning: UI device {0} doesn't exist!", i2cUIDevicePath);
 				}
 			}
 			
@@ -132,7 +181,7 @@ namespace RCCarService {
 
 			// Display
 
-			if (i2cUIDevicePath != null) {
+			if (i2cUIDevicePath != null && i2cUIDevicePath.Length > 0) {
 				Display = new I2CUIDevice(i2cUIDevicePath, 0x94);
 
 				MenuItem rootMenu = new MenuItem();

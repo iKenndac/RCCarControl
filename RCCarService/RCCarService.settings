@@ -1,0 +1,8 @@
+
+# RCCarService settings file.
+
+logdistance = 0
+logaccel = 0
+httpport = 7000 
+serialport = 
+i2c_ui = 
