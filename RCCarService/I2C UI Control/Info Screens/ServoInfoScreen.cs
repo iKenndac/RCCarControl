@@ -43,7 +43,7 @@ namespace RCCarService {
 		private void HandleUpButton() {
 
 			double newValue = ScreenServo.Value;
-			newValue += 0.1;
+			newValue += 0.05;
 			newValue = Math.Min(newValue, 1.0);
 			ScreenServo.Value = newValue;
 			
@@ -52,7 +52,7 @@ namespace RCCarService {
 		
 		private void HandleDownButton() {
 			double newValue = ScreenServo.Value;
-			newValue -= 0.1;
+			newValue -= 0.05;
 			newValue = Math.Max(newValue, -1.0);
 			ScreenServo.Value = newValue;
 			
