@@ -3,6 +3,7 @@ using System.Threading;
 using System.Net;
 using System.IO;
 using System.Diagnostics;
+using System.Reflection;
 using System.Collections.Generic;
 using RCCarCore;
 
@@ -36,10 +37,13 @@ namespace RCCarService {
 
 			Dictionary<string, string> settings = new Dictionary<string, string>();
 
-			if (!File.Exists(kSettingsFileName)) 
+			string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			path = Path.Combine(path, kSettingsFileName);
+
+			if (!File.Exists(path)) 
 				return settings;
 
-			using (StreamReader reader = new StreamReader(kSettingsFileName)) {
+			using (StreamReader reader = new StreamReader(path)) {
 				while (!reader.EndOfStream) {
 					string line = reader.ReadLine();
 
