@@ -194,7 +194,10 @@ namespace RCCarService {
 				};
 				sensorMenu.AddChild(accelerometerMenuItem);
 
-				MenuItem distanceMenuItem = new MenuItem("Distance");
+				MenuItem distanceMenuItem = new MenuItem("Distances");
+				distanceMenuItem.MenuItemChosen += delegate(MenuItem sender, EventArgs e) {
+					MainMenuController.PresentInfoScreen(new DistancesInfoScreen(Car.FrontUltrasonicSensors, Car.RearUltrasonicSensor));
+				};
 				sensorMenu.AddChild(distanceMenuItem);
 
 				MenuItem steeringMenuItem = new MenuItem("Steering Servo");

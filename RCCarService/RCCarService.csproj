@@ -44,6 +44,7 @@
     <Compile Include="I2C UI Control\Info Screens\ServoInfoScreen.cs" />
     <Compile Include="I2C UI Control\Info Screens\AccelerometerInfoScreen.cs" />
     <Compile Include="I2C UI Control\Info Screens\ConfirmationPromptInfoScreen.cs" />
+    <Compile Include="I2C UI Control\Info Screens\DistancesInfoScreen.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

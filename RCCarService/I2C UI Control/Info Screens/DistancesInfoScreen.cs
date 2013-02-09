@@ -1,16 +1,17 @@
 using System;
-using System.Text;
 using System.Timers;
 using RCCarCore;
 
 namespace RCCarService {
-	public class AccelerometerInfoScreen : InfoScreen {
+	public class DistancesInfoScreen : InfoScreen {
 
-		public AccelerometerInfoScreen(AccelerometorSensor accel) {
-			Accelerometer = accel;
+		public DistancesInfoScreen(UltrasonicSensor[] frontSensors, UltrasonicSensor rearSensor) {
+			FrontSensors = frontSensors;
+			RearSensor = rearSensor;
 		}
 
-		public AccelerometorSensor Accelerometer { get; private set; }
+		public UltrasonicSensor[] FrontSensors { get; private set; }
+		public UltrasonicSensor RearSensor { get; private set; }
 		private Timer RefreshTimer { get; set; }
 		
 		public override void Activate(I2CUIDevice screen) {
@@ -25,16 +26,16 @@ namespace RCCarService {
 			};
 			RefreshTimer.Enabled = true;
 		}
-
+		
 		public override void Deactivate() {
 			base.Deactivate();
 			RefreshTimer.Enabled = false;
 			RefreshTimer = null;
 		}
-
+		
 		private void UpdateScreen() {
-			Device.WriteString(String.Format("X:{0:+0.00;-0.00} Y:{1:+0.00;-0.00}", Accelerometer.X, Accelerometer.Y), 0, 0);
-			Device.WriteString(String.Format("Z:{0:+0.00;-0.00}", Accelerometer.Z), 1, 8);
+			Device.WriteString(String.Format("FL:{0:000} FM:{1:000}", FrontSensors[(int)UltrasonicSensorIndex.FrontLeft].DistanceReadingCM, FrontSensors[(int)UltrasonicSensorIndex.FrontMiddle].DistanceReadingCM), 0, 2);
+			Device.WriteString(String.Format("FR:{0:000} RM:{1:000}", FrontSensors[(int)UltrasonicSensorIndex.FrontRight].DistanceReadingCM, RearSensor.DistanceReadingCM), 1, 2);
 		}
 		
 		internal override void HandleButtons(I2CUIDevice sender, I2CUIDevice.ButtonMask buttons) {
@@ -45,7 +46,6 @@ namespace RCCarService {
 		private void HandleBackButton() {
 			NotifyExit();
 		}
-
 	}
 }
 
