@@ -1,12 +1,25 @@
 using System;
-using System.Timers;
-using RCCarCore;
+using System.Threading;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace RCCarService {
-	public class DistancesInfoScreen : InfoScreen {
 
-		public DistancesInfoScreen(UltrasonicSensor[] frontSensors, UltrasonicSensor rearSensor) {
-			FrontSensors = frontSensors;
+    public enum UltrasonicSensorIndex : int
+    {
+        FrontLeft = 0,
+        FrontMiddle = 1,
+        FrontRight = 2
+    }
+
+    public struct UltrasonicSensor {
+        public double DistanceReadingCM;
+        // Stub until RCCarCore is ported
+    }
+
+	internal class DistancesInfoScreen : InfoScreen {
+
+		public DistancesInfoScreen([ReadOnlyArray()] UltrasonicSensor[] frontSensors, UltrasonicSensor rearSensor) {
+			FrontSensors = (UltrasonicSensor[])frontSensors.Clone();
 			RearSensor = rearSensor;
 		}
 
@@ -14,22 +27,21 @@ namespace RCCarService {
 		public UltrasonicSensor RearSensor { get; private set; }
 		private Timer RefreshTimer { get; set; }
 		
-		public override void Activate(I2CUIDevice screen) {
+		internal override void Activate(I2CUIDevice screen) {
 			base.Activate(screen);
 			Device.ClearScreen();
-			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Left, I2CUIDevice.ButtonSymbolPosition.Button1);
+			Device.WriteButtonSymbol(CustomCharacter.Left, ButtonSymbolPosition.Button1);
 			UpdateScreen();
-			RefreshTimer = new Timer(500);
-			RefreshTimer.AutoReset = true;
-			RefreshTimer.Elapsed += delegate(object sender, ElapsedEventArgs e) {
-				UpdateScreen();
-			};
-			RefreshTimer.Enabled = true;
-		}
+            TimerCallback callback = delegate (object sender)
+            {
+                UpdateScreen();
+            };
+            RefreshTimer = new Timer(callback, null, 0, 500);
+        }
 		
-		public override void Deactivate() {
+		internal override void Deactivate() {
 			base.Deactivate();
-			RefreshTimer.Enabled = false;
+			RefreshTimer.Dispose();
 			RefreshTimer = null;
 		}
 		
@@ -38,8 +50,8 @@ namespace RCCarService {
 			Device.WriteString(String.Format("FR:{0:000} RM:{1:000}", FrontSensors[(int)UltrasonicSensorIndex.FrontRight].DistanceReadingCM, RearSensor.DistanceReadingCM), 1, 2);
 		}
 		
-		internal override void HandleButtons(I2CUIDevice sender, I2CUIDevice.ButtonMask buttons) {
-			if ((buttons & I2CUIDevice.ButtonMask.Button1) == I2CUIDevice.ButtonMask.Button1)
+		internal override void HandleButtons(I2CUIDevice sender, ButtonMask buttons) {
+			if ((buttons & ButtonMask.Button1) == ButtonMask.Button1)
 				HandleBackButton();
 		}
 		

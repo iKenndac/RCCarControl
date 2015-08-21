@@ -2,7 +2,7 @@ using System;
 using System.Text;
 
 namespace RCCarService {
-	public class MenuController {
+	public sealed class MenuController {
 
 		public MenuController(I2CUIDevice device, MenuItem rootMenu) {
 			Device = device;
@@ -19,7 +19,7 @@ namespace RCCarService {
 
 		private int DisplayedMenuIndex { get; set; }
 		private MenuItem CurrentMenu { get; set; }
-		public InfoScreen CurrentInfoScreen { get; private set; }
+		internal InfoScreen CurrentInfoScreen { get; private set; }
 
 		private bool couldGoBack;
 		private bool didHaveSubmenus;
@@ -29,9 +29,9 @@ namespace RCCarService {
 			didHaveSubmenus = false;
 
 			Device.ClearScreen();
-			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Up, I2CUIDevice.ButtonSymbolPosition.Button3);
-			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Down, I2CUIDevice.ButtonSymbolPosition.Button4);
-			Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Tick, I2CUIDevice.ButtonSymbolPosition.Button6);
+			Device.WriteButtonSymbol(CustomCharacter.Up, ButtonSymbolPosition.Button3);
+			Device.WriteButtonSymbol(CustomCharacter.Down, ButtonSymbolPosition.Button4);
+			Device.WriteButtonSymbol(CustomCharacter.Tick, ButtonSymbolPosition.Button6);
 		}
 
 		public void ResetScreen() {
@@ -40,7 +40,7 @@ namespace RCCarService {
 			UpdateScreen();
 		}
 
-		public void PresentInfoScreen(InfoScreen screen) {
+		internal void PresentInfoScreen(InfoScreen screen) {
 			CurrentInfoScreen = screen;
 			if (CurrentInfoScreen == null) {
 				DismissInfoScreen();
@@ -75,7 +75,7 @@ namespace RCCarService {
 			// Make sure to either truncate or pad out the text for clean drawing.
 			if (firstLine.Length > 16) {
 				firstLine = firstLine.Substring(0, 15);
-				firstLine += (char)I2CUIDevice.CustomCharacter.Ellipsis;
+				firstLine += (char)CustomCharacter.Ellipsis;
 			} else if (firstLine.Length < 16) {
 				firstLine = firstLine.PadRight(16);
 			}
@@ -85,9 +85,9 @@ namespace RCCarService {
 			bool canGoBack = (CurrentMenu.Parent != null);
 			if (canGoBack != couldGoBack) {
 				if (canGoBack)
-					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Left, I2CUIDevice.ButtonSymbolPosition.Button1);
+					Device.WriteButtonSymbol(CustomCharacter.Left, ButtonSymbolPosition.Button1);
 				else
-					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Blank, I2CUIDevice.ButtonSymbolPosition.Button1);
+					Device.WriteButtonSymbol(CustomCharacter.Blank, ButtonSymbolPosition.Button1);
 
 				couldGoBack = canGoBack;
 			}
@@ -95,29 +95,29 @@ namespace RCCarService {
 			bool hasSubmenus = (displayedItem.ChildItems.Length != 0);
 			if (didHaveSubmenus != hasSubmenus) {
 				if (hasSubmenus)
-					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Right, I2CUIDevice.ButtonSymbolPosition.Button6);
+					Device.WriteButtonSymbol(CustomCharacter.Right, ButtonSymbolPosition.Button6);
 				else
-					Device.WriteButtonSymbol(I2CUIDevice.CustomCharacter.Tick, I2CUIDevice.ButtonSymbolPosition.Button6);
+					Device.WriteButtonSymbol(CustomCharacter.Tick, ButtonSymbolPosition.Button6);
 
 				didHaveSubmenus = hasSubmenus;
 			}
 
 		}
 
-		private void HandleButtons(I2CUIDevice sender, I2CUIDevice.ButtonMask buttons) {
+		private void HandleButtons(I2CUIDevice sender, ButtonMask buttons) {
 
 			if (CurrentInfoScreen != null) {
 				CurrentInfoScreen.HandleButtons(sender, buttons);
 				return;
 			}
 
-			if ((buttons & I2CUIDevice.ButtonMask.Button1) == I2CUIDevice.ButtonMask.Button1)
+			if ((buttons & ButtonMask.Button1) == ButtonMask.Button1)
 				HandleBackButton();
-			else if ((buttons & I2CUIDevice.ButtonMask.Button3) == I2CUIDevice.ButtonMask.Button3)
+			else if ((buttons & ButtonMask.Button3) == ButtonMask.Button3)
 				HandleUpButton();
-			else if ((buttons & I2CUIDevice.ButtonMask.Button4) == I2CUIDevice.ButtonMask.Button4)
+			else if ((buttons & ButtonMask.Button4) == ButtonMask.Button4)
 				HandleDownButton();
-			else if ((buttons & I2CUIDevice.ButtonMask.Button6) == I2CUIDevice.ButtonMask.Button6)
+			else if ((buttons & ButtonMask.Button6) == ButtonMask.Button6)
 				HandleSelectButton();
 
 		}

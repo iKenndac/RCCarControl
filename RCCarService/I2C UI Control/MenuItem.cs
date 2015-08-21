@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace RCCarService {
-	public class MenuItem {
+
+    public delegate void MenuItemChosenEventHandler(MenuItem sender);
+
+    public sealed class MenuItem {
 
 		private List<MenuItem> children = new List<MenuItem>();
 
@@ -14,7 +18,6 @@ namespace RCCarService {
 			Title = title;
 		}
 
-		public delegate void MenuItemChosenEventHandler(MenuItem sender, EventArgs e);
 		public event MenuItemChosenEventHandler MenuItemChosen;
 
 		public string Title { get; private set; }
@@ -31,7 +34,7 @@ namespace RCCarService {
 			item.Parent = this;
 		}
 
-		public void AddChildren(MenuItem[] items) {
+		public void AddChildren([ReadOnlyArray()] MenuItem[] items) {
 			foreach (MenuItem item in items)
 				AddChild(item);
 		}
@@ -42,7 +45,7 @@ namespace RCCarService {
 			item.Parent = null;
 		}
 
-		public void RemoveChildren(MenuItem[] items) {
+		public void RemoveChildren([ReadOnlyArray()] MenuItem[] items) {
 			foreach (MenuItem item in items)
 				RemoveChild(item);
 		}
@@ -53,7 +56,7 @@ namespace RCCarService {
 
 		public void HandleBeingChosen() {
 			if (MenuItemChosen != null)
-				MenuItemChosen(this, null);
+				MenuItemChosen(this);
 		}
 
 	}
