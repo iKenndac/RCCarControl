@@ -1,14 +1,9 @@
 using System;
 using System.Threading;
+using RCCarCore;
 
 namespace RCCarService {
-
-    public struct AccelerometorSensor
-    {
-        public double X, Y, Z;
-        // This is a stub intil RCCarCore is ported.
-    }
-
+    
     internal class AccelerometerInfoScreen : InfoScreen {
 
 		public AccelerometerInfoScreen(AccelerometorSensor accel) {

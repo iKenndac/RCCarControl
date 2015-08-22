@@ -32,5 +32,10 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <Capability Name="internetClientServer" />
+    <DeviceCapability Name="serialcommunication">
+      <Device Id="any">
+        <Function Type="name:serialPort"/>
+      </Device>
+    </DeviceCapability>
   </Capabilities>
 </Package>

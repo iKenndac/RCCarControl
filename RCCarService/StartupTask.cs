@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net.Http;
 using Windows.ApplicationModel.Background;
 using System.Diagnostics;
 using Windows.Devices.I2c;
 using Windows.Devices.Enumeration;
+using RCCarCore;
 
 // The Background Application template is documented at http://go.microsoft.com/fwlink/?LinkID=533884&clcid=0x409
 
@@ -17,11 +14,14 @@ namespace RCCarService
         BackgroundTaskDeferral deferral;
         I2CUIDevice screen;
         MenuController menu;
+        SerialCarHardwareInterface car;
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             deferral = taskInstance.GetDeferral();
             ConnectToScreen(0x4a);
+
+            car = new SerialCarHardwareInterface(null);
         }
 
         public async void ConnectToScreen(int deviceAddress)
@@ -63,32 +63,28 @@ namespace RCCarService
             MenuItem accelerometerMenuItem = new MenuItem("Accelerometer");
             accelerometerMenuItem.MenuItemChosen += delegate (MenuItem sender)
             {
-                menu.PresentInfoScreen(new ConfirmationPromptInfoScreen("Not implemented!", ConfirmationPromptButtons.Tick));
-                //menu.PresentInfoScreen(new AccelerometerInfoScreen(Car.Accelerometor));
+                menu.PresentInfoScreen(new AccelerometerInfoScreen(car.Accelerometor));
             };
             sensorMenu.AddChild(accelerometerMenuItem);
 
             MenuItem distanceMenuItem = new MenuItem("Distances");
             distanceMenuItem.MenuItemChosen += delegate (MenuItem sender)
             {
-                menu.PresentInfoScreen(new ConfirmationPromptInfoScreen("Not implemented!", ConfirmationPromptButtons.Tick));
-                //menu.PresentInfoScreen(new DistancesInfoScreen(Car.FrontUltrasonicSensors, Car.RearUltrasonicSensor));
+                menu.PresentInfoScreen(new DistancesInfoScreen(car.FrontUltrasonicSensors, car.RearUltrasonicSensor));
             };
             sensorMenu.AddChild(distanceMenuItem);
 
             MenuItem steeringMenuItem = new MenuItem("Steering Servo");
             steeringMenuItem.MenuItemChosen += delegate (MenuItem sender)
             {
-                menu.PresentInfoScreen(new ConfirmationPromptInfoScreen("Not implemented!", ConfirmationPromptButtons.Tick));
-                //menu.PresentInfoScreen(new ServoInfoScreen(Car.SteeringServo, "Steering"));
+                menu.PresentInfoScreen(new ServoInfoScreen(car.SteeringServo, "Steering"));
             };
             sensorMenu.AddChild(steeringMenuItem);
 
             MenuItem throttleMenuItem = new MenuItem("Throttle Servo");
             throttleMenuItem.MenuItemChosen += delegate (MenuItem sender)
             {
-                menu.PresentInfoScreen(new ConfirmationPromptInfoScreen("Not implemented!", ConfirmationPromptButtons.Tick));
-                //menu.PresentInfoScreen(new ServoInfoScreen(Car.ThrottleServo, "Throttle"));
+                menu.PresentInfoScreen(new ServoInfoScreen(car.ThrottleServo, "Throttle"));
             };
             sensorMenu.AddChild(throttleMenuItem);
 

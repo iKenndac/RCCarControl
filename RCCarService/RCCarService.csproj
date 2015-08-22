@@ -130,6 +130,12 @@
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RCCarCore\RCCarCore.csproj">
+      <Project>{d94f6ecf-a074-4e34-8a8b-bb97b57f231f}</Project>
+      <Name>RCCarCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

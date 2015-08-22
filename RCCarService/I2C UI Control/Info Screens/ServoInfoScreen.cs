@@ -1,17 +1,8 @@
 using System;
-using System.Text;
+using RCCarCore;
 
 namespace RCCarService {
-
-     public sealed class Servo
-     {
-        public double Value
-        {
-            get; set;
-        }
-        // This is a stub until RCCarCore is ported.
-    }
-
+    
 	internal class ServoInfoScreen : InfoScreen {
 
 		public ServoInfoScreen(Servo servo, string name) {

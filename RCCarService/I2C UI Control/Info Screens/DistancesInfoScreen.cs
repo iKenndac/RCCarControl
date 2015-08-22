@@ -1,20 +1,9 @@
 using System;
 using System.Threading;
 using System.Runtime.InteropServices.WindowsRuntime;
+using RCCarCore;
 
 namespace RCCarService {
-
-    public enum UltrasonicSensorIndex : int
-    {
-        FrontLeft = 0,
-        FrontMiddle = 1,
-        FrontRight = 2
-    }
-
-    public struct UltrasonicSensor {
-        public double DistanceReadingCM;
-        // Stub until RCCarCore is ported
-    }
 
 	internal class DistancesInfoScreen : InfoScreen {
 

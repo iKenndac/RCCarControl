@@ -205,10 +205,6 @@ namespace RCCarService {
             {
                 Debug.WriteLine("Got {0} bytes, expected {1}.", readResult.BytesTransferred, expectedResponseLength);
             }
-            else
-            {
-                Debug.WriteLine("Got the number of bytes we expected ({0}).", expectedResponseLength);
-            }
 
             return readData;
         }
